@@ -10,3 +10,8 @@
 
 ## Planeamento do projeto
 
+*Backend* - Rui Raposo & Pedro Brito
+*Frontend* - Ricardo Ribeiro & António Sardinha
+Relatório - Pedro Brito
+Testes - António Sardinha
+

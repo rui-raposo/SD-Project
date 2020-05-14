@@ -3,8 +3,7 @@
 ## Wednesday 13th May 2020
 
 - [x] Solving all the practical exercises (teacher's web site).
-- Frontend:
-  - [x] Home (after sign in) initialized.
+- [x] Home (after sign in) initialized.
   
 > Rui Raposo 39986
 

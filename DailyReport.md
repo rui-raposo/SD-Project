@@ -12,3 +12,11 @@
 ## Thursday 14th May 2020
 
 - [x] Intro page done.
+- [x] Profile page done.
+- [x] Looking for backup stuff.
+
+> Rui Raposo 39986
+
+> Ricardo Ribeiro 39529
+
+## Friday 15th May 2020

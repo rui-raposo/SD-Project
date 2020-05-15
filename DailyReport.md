@@ -20,3 +20,6 @@
 > Ricardo Ribeiro 39529
 
 ## Friday 15th May 2020
+
+- [x] Backup stuff.
+- [x] Finish the home page (with previous login).

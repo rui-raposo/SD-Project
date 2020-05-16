@@ -23,3 +23,7 @@
 
 - [x] Backup stuff.
 - [x] Finish the home page (with previous login).
+
+> Rui Raposo 39986
+
+> Ricardo Ribeiro 39529

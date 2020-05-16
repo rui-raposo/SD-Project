@@ -27,3 +27,10 @@
 > Rui Raposo 39986
 
 > Ricardo Ribeiro 39529
+
+## Saturday 16th May 2020
+
+- [x] Documentation
+- [x] Backend
+
+> Rui Raposo 39986

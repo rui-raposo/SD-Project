@@ -37,7 +37,6 @@ public class SignIn {
      * Goal            : Validate the sign in
      * Parameters      : Username and Password inserted from the input fields (index.xhtml)
      * Security        : Decrypt from database and compare with the inserted password ?? [To be approved]
-     * Difficulty Level : [0-10] --> 1
      */
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
     public String signInFunction(String username, String password) throws SQLException{
@@ -76,7 +75,6 @@ public class SignIn {
      * Goal            : Valide the sign up
      * Parameters      : Username, Password, Password2 from the input fields (index.xhtml)
      * Security        : If there's any user with the specific username and the passwords match, cipher the password ?? [To be approved]
-     * Difficulty Level : [0-10] --> 1
      */
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
     public String signUpFunction(String username, String pw, String pw2) throws SQLException{

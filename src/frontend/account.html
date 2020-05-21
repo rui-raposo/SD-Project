@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+
+	<style type="text/css">
+
+		body, html {
+  			line-height: 1.8;
+  			color: black;
+  			background: rgb(244,232,204);
+background: linear-gradient(0deg, rgba(244,232,204,1) 40%, rgba(250,192,64,1) 59%, rgba(255,188,53,1) 100%);
+		
+		}
+
+		input{
+			outline-width: 0;
+			background: none;
+		}
+
+		.round-photo {
+		  width:200px;
+		  height:200px;
+		  object-fit:cover;
+		  border-radius:50%;
+
+		}
+
+		.active{
+			background-color: #FFD279;
+		}
+
+		::placeholder{
+			color: gray;
+		};
+	
+	</style>
+	
+	<body>
+
+		<!-- Top Bar With Login -->
+		<div class="w3-top">
+			<div style="background-color: #ffbc35" class="w3-bar w3-text-black w3-card-4 w3-animate-top w3-text-white" id="myNavBar">
+				<a class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button w3-border-right w3-border-white">Home</a>
+				<a class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button">
+					<i class="fa fa-th" style="margin-right: 10px"></i>News</a>
+				<a class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button">
+					<i class="fa fa-home" style="margin-right: 10px" aria-hidden="true"></i>Houses</a>
+				<a class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button">
+					<i class="fa fa-bookmark" aria-hidden="true" style="margin-right: 10px"></i>About</a>
+				<a class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button w3-right">
+					<i class="fa fa-sign-out" style="margin-right: 10px" aria-hidden="true"></i>Logout</a>
+				<a class="active w3-padding-16 w3-bar-item w3-hover-opacity w3-button w3-right">
+					<i class="fa fa-user" aria-hidden="true" style="margin-right: 10px"></i>Profile</a>
+			</div>
+		</div>
+
+		<!-- Settings -->
+		<div id="title" class="w3-center w3-padding-64" style="margin-top: 50px">
+			<h2><i class="fa fa-cog" style="margin-right: 10px; margin-bottom: 35px"></i>Settings</h2>
+			<i class="fa fa-user-o" style="margin-right: 10px;font-size:28px"></i>
+			<input style="width: 20%;display: inline"  class="w3-input w3-border-black w3-border-bottom"  type="text" name="emailSignIn" readonly value="username readonly">
+			<br>
+ 			<i class="fa fa-lock" style="margin-top: 25px;margin-right: 6px;font-size:28px"></i>
+ 			<input class="w3-input w3-border-black w3-border-bottom" style="width: 20%;display: inline" type="password" name="passwordSignIn" required>
+ 			<br>
+ 			<i class="fa fa-lock" style="margin-top: 25px;margin-right: 6px;font-size:28px"></i>
+ 			<input class="w3-input w3-border-black w3-border-bottom" style="width: 20%;display: inline" type="password" name="passwordSignIn" required><br>
+ 			<i class="fa fa-lock" style="margin-top: 25px;margin-right: 6px;font-size:28px"></i>
+ 			<input class="w3-input w3-border-black w3-border-bottom" style="width: 20%;display: inline" type="password" name="passwordSignIn" required>
+ 			<button id="butt-sign-in" type="submit" style="margin:auto; width: 20%; margin-top: 20px;background-color: #273c4e" class="w3-button w3-text-white w3-block w3-padding-large w3-round-large ">Submit</button>
+		</div>
+
+		<div id="my-houses" class="w3-container" style="margin-left: 15%; margin-right: 15%; margin-top: 50px;">
+			<h2 class="w3-center w3-padding-64"><i class="fa fa-home" style="margin-right: 10px" aria-hidden="true"></i>My Houses</h2>
+			<ul class="w3-margin-top w3-ul w3-card-4 " style="">
+	    		<li class="w3-bar w3-justify w3-half" >
+		      		<img src="images/casa-de-neve.jpg" class="round-photo w3-bar-item w3-hide-small" style="width:200px; margin: auto;">
+		      		<div class="w3-bar-item">
+		        		<span class="w3-large">Rua Zeca Afonso Lote 37 - Boidobra</span><br>
+		        		<span>6200-283 - Covilhã</span><br>
+		        		<span>Rui Raposo</span><br>
+		        		<span>200.000,000€</span><br>
+		        		<span>8</span>
+		  			</div>
+		  			<button id="butt-sign-in" type="submit" style="margin:auto; width: 100%; margin-top: 20px;" class="w3-button w3-hover-red w3-margin-bottom w3-hover-opacity w3-text-white w3-block w3-padding-large w3-round-large w3-red">Deliver</button>
+		    	</li>
+		    	<li class="w3-bar w3-half w3-justify">
+		      		<img src="images/casa-de-neve.jpg" class="round-photo w3-bar-item w3-hide-small" style="width:200px">
+		      		<div class="w3-bar-item">
+		        		<span class="w3-large">Mike</span><br>
+	        			<span>Web Designer</span>
+	  				</div>
+	      			<button id="butt-sign-in" type="submit" style="margin:auto; width: 100%; margin-top: 20px;" class="w3-button w3-hover-red w3-margin-bottom w3-hover-opacity w3-text-white w3-block w3-padding-large w3-round-large w3-red">Deliver</button>
+	   	 		</li>
+			</ul>
+		</div>	
+
+
+		<!-- Footer -->
+		<footer class="w3-center" style="margin-top: 64px;margin-bottom: 30px">
+			<label style="font-weight: bold">Powered by : <a href="https://www.w3schools.com/css/default.asp">W3.css</a></label>
+			<br>
+			<a id="git" href="https://github.com/rui-raposo/SD-Project"><img src="images/github-logo.png"></a>
+		</footer>
+
+	</body>
+
+</html>

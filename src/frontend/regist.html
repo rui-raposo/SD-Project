@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+
+	<style type="text/css">
+		
+		body, html {
+  			height: 100%;
+  			line-height: 1.8;
+  			color: black;
+  			background: rgb(244,232,204);
+background: linear-gradient(0deg, rgba(244,232,204,1) 40%, rgba(250,192,64,1) 59%, rgba(255,188,53,1) 100%);
+		
+		}
+
+
+		*{
+			
+		}
+
+		/* Create a Parallax Effect */
+		.bgimg-1{
+	  		background-attachment: fixed;
+	  		background-position: center;
+	  		background-repeat: no-repeat;
+	  		background-size: cover;
+		}
+
+		/* First image (Logo. Full height) */
+		.bgimg-1 {
+			margin-top: 9%;
+	  		min-height: 100%;
+		}
+
+		input{
+			outline-width: 0;
+			background: none;
+		}
+
+		#butt-sign-up:hover{
+			background-color: #1fe0a0;
+		}
+
+		::placeholder{
+			color: gray;
+		}
+
+	</style>
+
+
+	<body>
+
+		<!-- Title -->
+		<div id="title" class="w3-container w3-center">
+			<img style="margin-top: 8%;margin-bottom: 35px" src="images/fafao-removebg-preview.png">
+			<br>
+			<i class="fa fa-user-o" style="margin-right: 2px;font-size:28px"></i>
+			<input placeholder="username" style="width: 20%;display: inline"  class="w3-input w3-border-black w3-border-bottom"  type="text" name="emailSignIn" required>
+	 		<br>
+	 		<i class="fa fa-lock" style="margin-top: 25px;margin-right: 6px;font-size:28px"></i>
+	 		<input placeholder="password" class="w3-input w3-border-black w3-border-bottom" style="width: 20%;display: inline" type="password" name="passwordSignIn" required> <br>
+	 		<i class="fa fa-lock" style="margin-top: 25px;margin-right: 6px;font-size:28px"></i>
+	 		<input placeholder="confirm password" class="w3-input w3-border-black w3-border-bottom" style="width: 20%;display: inline" type="password" name="passwordSignIn" required> <br>
+	 		<button id="butt-sign-in" type="submit" style="background-color: #273c4e; display:inline;margin:auto; width: 20%; margin-top: 40px;" class="w3-button w3-hover-opacity w3-text-white w3-block w3-padding-large w3-round-large w3-margin-bottom">Sign Up</button><br>
+		</div>
+
+		<!-- Footer -->
+		<footer class="w3-center w3-bottom" style="margin-bottom: 30px">
+			<label style="font-weight: bold">Powered by : <a href="https://www.w3schools.com/css/default.asp">W3.css</a></label>
+			<br>
+			<a id="git" href="https://github.com/rui-raposo/SD-Project"><img src="images/github-logo.png"></a>
+		</footer>
+
+		</div>
+
+	</body>
+</html>

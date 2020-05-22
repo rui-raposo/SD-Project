@@ -17,12 +17,12 @@
 
 ## Tarefas a realizar
 
-- [ ] **T1** : Análise detalhada de toda a documentação proveniente dos apontamentos teóricos;
-- [ ] **T2** : Realização das fichas práticas colocadas no _web_ site da professora;
-- [ ] **T3** : Contextualização com os objetivos propostos e preparação do ambiente de trabalho;
-- [ ] **T4** : Escolha de todas as _frameworks_ a utilizar no âmbito do projeto; 
+- [x] **T1** : Análise detalhada de toda a documentação proveniente dos apontamentos teóricos;
+- [x] **T2** : Realização das fichas práticas colocadas no _web_ site da professora;
+- [x] **T3** : Contextualização com os objetivos propostos e preparação do ambiente de trabalho;
+- [x] **T4** : Escolha de todas as _frameworks_ a utilizar no âmbito do projeto; 
 - [ ] **T5** : Implementação de todo o _backend_ do sistema;
-- [ ] **T6** : Implementação de todo o _frontend_ do sistema;
+- [x] **T6** : Implementação de todo o _frontend_ do sistema;
 - [ ] **T7** : Análise e testes do sistema;
 - [ ] **T8** : Escrita do relatório.
 

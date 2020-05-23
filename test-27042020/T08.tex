@@ -58,5 +58,23 @@ O uso do tempo em sistemas distribuídos é feito em \textbf{dois} aspetos:
 
 -- Um \textit{timestamp} está associado a um ponto na \textit{timeline}.
 
+Se queremos comparar a duração de vários acontecimentos podemos usar:
+\begin{itemize}
+	\item \textbf{intervalos de tempo}, cadeia de tempo composta por vários intervalos adicionados;
+	\item \textbf{\textit{Timers}/Relógios locais}, implementam a abstração da \textit{timeline}.
+\end{itemize}
+
+Num sistema distribuído cada evento pode ocorrer em diferentes locais, cada um com a sua \textit{timeline}. \textbf{Como conciliar diferentes \textit{timelines}? Como medir durações distribuídas?}
+
+\begin{itemize}
+	\item \textbf{Tempo Global}, implementa a abstração de um tempo universal, através de um relógio que fornece o mesmo tempo a \textbf{todos} os participantes no sistema;
+	\item \textbf{Tempo Absoluto}, padrões universalmente ajustados, disponíveis como fontes de tempo externo para o qual qualquer relógio interno se pode sincronizar;
+	\item \textbf{Relógio físico local}, o modo mais comum para fornecer uma fonte de tempo num processo
+\end{itemize}
+
+
+
+
+
 
 \end{document}

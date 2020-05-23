@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{quoting}
+\usepackage{datetime}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\setcounter{secnumdepth}{4}
+\date{\today \\ \currenttime} 
+\title{Sistemas Distribuídos}
+\author{Rui Raposo}
+
+
+\begin{document}
+\maketitle
+
+\section{Recordando...}
+
+\begin{itemize}
+	\item \textbf{Modelo de Avarias}: caracteriza o sistema em termos das falhas/avarias, i.e., dos desvios em relação ao comportamento especificado, que os seus componentes podem apresentar.
+	\item \textbf{Modelo de Sincronismo}: caracteriza o sistema em termos do comportamento temporal dos seus componentes:
+		\begin{itemize}
+			\item Processos;
+			\item Relógios locais;
+			\item Canais de comunicação;
+			\item Síncrono;
+			\item Assíncrono.
+		\end{itemize}
+		Um sistema diz-se \textbf{síncrono} se e só se:
+		\begin{enumerate}
+			\item É conhecido um limite inferior e um limite superior para o tempo que cada processo leva a executar;
+			\item É conhecido um limite inferior e um limite superior para o atraso na comunicação entre os seus componentes;
+			\item Cada processo tem um relógio local e é conhecido um limite superior para o desvio na sua taxa de incremento.
+		\end{enumerate}
+		Um sistema diz-se \textbf{assíncrono} se \textbf{nada se assume sobre o comportamento temporal do sistema}.
+		\item \textbf{Dilema}: É relativamente fácil resolver problemas com sistemas síncronos, mas é extremamente difícil construir um sistema síncrono.
+\end{itemize}
+
+\section{Tempo e Relógios -- O papel do tempo}
+
+\begin{itemize}
+	\item Precisa de ser medido com elevada \textbf{precisão};
+	\item Precisa de ser medido de forma \textbf{consistente} pelos diversos componentes de um sistema;
+	\item Crucial na \textbf{ordenação} de eventos (observadores distintos podem testemunhar eventos por ordens diferentes);
+	\item Tempo Real?
+		\begin{itemize}
+			\item Função monótona contínua e crescente;
+			\item Unidade: segundo.
+		\end{itemize}
+\end{itemize}
+
+O uso do tempo em sistemas distribuídos é feito em \textbf{dois} aspetos:
+
+\begin{enumerate}
+	\item Registar e observar a localização de eventos na \textit{timeline}. Queremos saber qual a sequência em que ocorreu um conjunto de eventos (possivelmente distribuídos por várias máquinas);
+	\item Forçar o futuro posicionamento de eventos na \textit{timeline}. Sincronização do progresso concorrente do sistema para conhecermos qual a sequência de um conjunto de acontecimentos podemos marcar o instante de ocorrência atribuindo um, \textbf{\textit{Timestamp}}.
+\end{enumerate}
+
+\textit{\textbf{Timestamp}} -- sequència de caracteres que marcam a data e/ou tempo no qual um certo evento ocorreu (exemplo, data de criação/modificação de um ficheiro).
+
+-- Um \textit{timestamp} está associado a um ponto na \textit{timeline}.
+
+
+\end{document}

@@ -2,6 +2,7 @@ package beans;
 
 import classes.Houses;
 import classes.HousesProcess;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name="Profile_Service")
 @SessionScoped
 
-public class Profile_Service {
+public class Profile_Service implements Serializable{
     
     // Class variables
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -44,7 +45,7 @@ public class Profile_Service {
     public void updateHousesList(String username) throws SQLException {
         // restart the arraylist
         this.myHouses = new ArrayList<HousesProcess>();
-        String address, zip_code, owner, state;
+        String address, zip_code, owner, state, properties;
         float value;
         int evaluation, pos;
         // connection to the database
@@ -53,7 +54,7 @@ public class Profile_Service {
         Statement ps = con.createStatement();
         try{
             // get all the requested/owned houses.
-            ResultSet x = ps.executeQuery("SELECT P.POSITION, H.ADDRESS, H.ZIP_CODE, H.VALUE, H.EVALUATION, H.OWNER FROM HOUSES H INNER JOIN "
+            ResultSet x = ps.executeQuery("SELECT H.PROPERTIES, P.POSITION, H.ADDRESS, H.ZIP_CODE, H.VALUE, H.EVALUATION, H.OWNER FROM HOUSES H INNER JOIN "
                     + "PROCESS P ON H.ADDRESS = P.ADDRESS AND H.ZIP_CODE = P.ZIP_CODE WHERE P.USERNAME = '" + username + "'");
             // loop to data
             while(x.next()){
@@ -69,8 +70,10 @@ public class Profile_Service {
                 owner = x.getString("owner");
                 // get position
                 pos = x.getInt("position");
+                // get properties
+                properties = x.getString("properties");
                 // create object
-                Houses obj = new Houses(owner, address, zip_code, evaluation);
+                Houses obj = new Houses(owner, address, zip_code, properties, evaluation);
                 // append in arraylists method
                 this.getCurrentStatus(username, address, zip_code, pos, obj);
             }
@@ -82,6 +85,44 @@ public class Profile_Service {
     }
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
     
+    
+    /* Goal       : Change user's password.
+     * Parameters : new_password_1, new_password_2, current_password, username
+     * Security   : ???
+     */
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------
+    public void changePassword(String username, String password1, String password2, String password_curr) throws SQLException{
+        
+        // check if the password1 and password2 match
+        if(!password1.equals(password2))
+            return;
+        
+        // String variable 
+        String aux = "";
+        // connection to the database
+        Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/ProjectDB", "raposo","raposo0990123");
+        // prepare to create a statement
+        Statement ps = con.createStatement();
+        
+        try{
+            // verify if the curr_password match with database one
+            ResultSet x = ps.executeQuery("SELECT PASSWORD FROM USERS WHERE USERNAME = '" + username + "'");
+            // loop to get data
+            while(x.next()){
+                aux = x.getString("password");
+            }        
+        }catch(SQLException e){};
+        
+        // compare data
+        if(password_curr.equals(aux))
+            ps.executeUpdate("UPDATE USERS SET password = '" + password1 + "' WHERE username = '" + username + "'");
+        
+        // close the connection to the database and statement
+        con.close();
+        ps.close();
+        
+    }
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------
     
     /*
      * Goal       : Append in another arraylist!
@@ -173,7 +214,7 @@ public class Profile_Service {
      * Security   : None
      */
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
-    public void insertNewHouse(String username, String address, String zip_code, String zip_code2, Float lease, String Features) throws SQLException{
+    public void insertNewHouse(String username, String address, String zip_code, String zip_code2, Float lease, String features) throws SQLException{
         
         // connection to the database
         Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/ProjectDB", "raposo","raposo0990123");
@@ -185,7 +226,7 @@ public class Profile_Service {
         String new_zip = zip_code + " - " + zip_code2;
         
         try{
-            ps.executeUpdate("INSERT INTO HOUSES VALUES('" + address + "','" + new_zip + "','" + username + "'," + lease + ",5)");
+            ps.executeUpdate("INSERT INTO HOUSES VALUES('" + address + "','" + new_zip + "','" + username + "'," + lease + ", 5, '" + features + "')");
         }catch(SQLException e){};
         
         // close the connection and the statement

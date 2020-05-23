@@ -49,7 +49,7 @@ public class Home_Service implements Serializable{
         // restart the arraylist
         this.list_houses = new ArrayList<Houses>();
         // variables for future loop
-        String address, zip_code, owner;
+        String address, zip_code, owner, properties;
         float value;
         int evaluation, count = 0;
         
@@ -62,7 +62,7 @@ public class Home_Service implements Serializable{
         
         try{
             // check if there's any user with that properties
-            ResultSet x = ps.executeQuery("SELECT H.ADDRESS, H.ZIP_CODE, H.VALUE, H.EVALUATION, H.OWNER FROM "
+            ResultSet x = ps.executeQuery("SELECT H.PROPERTIES, H.ADDRESS, H.ZIP_CODE, H.VALUE, H.EVALUATION, H.OWNER FROM "
             + "HOUSES H LEFT JOIN PROCESS P ON H.ADDRESS = P.ADDRESS AND H.ZIP_CODE = P.ZIP_CODE");
             // returns in 'list' form
             while (x.next()) {
@@ -84,8 +84,10 @@ public class Home_Service implements Serializable{
                 evaluation = x.getInt("evaluation");
                 // get owner
                 owner = x.getString("owner");
+                // get properties
+                properties = x.getString("properties");
                 // create object
-                Houses obj = new Houses(owner, address, zip_code, evaluation);
+                Houses obj = new Houses(owner, address, zip_code, properties, evaluation);
                 // check if its already in array
                 if(checkData(obj)){
                     // append in arraylist

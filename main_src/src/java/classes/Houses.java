@@ -4,17 +4,19 @@ public class Houses {
     private String owner;
     private String address;
     private String zip_Code;
+    private String properties;
     private int rate;
     private float price;
 
-    public Houses(String owner, String address, String zip_Code, float price) {
+    public Houses(String owner, String address, String zip_Code, String properties, float price) {
         this.owner = owner;
         this.address = address;
         this.zip_Code = zip_Code;
         this.price = price;
+        this.properties = properties;
         this.rate = 5;
     }
-    
+
     public String getOwner() {
         return owner;
     }
@@ -53,6 +55,14 @@ public class Houses {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public void setProperties(String properties) {
+        this.properties = properties;
+    }
+    
+    public String getProperties() {
+        return properties;
     }
 
 }

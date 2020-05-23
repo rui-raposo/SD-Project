@@ -1,10 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
@@ -46,7 +47,7 @@
         }
 
         ::placeholder{
-            color: gray;
+            color: #777;
         };
 
         #upload_file 
@@ -88,7 +89,7 @@
         <!-- Top Bar With Login -->
         <div class="w3-top">
             <div style="background-color: #F5A927" class="w3-bar w3-text-black w3-card-4 w3-animate-top w3-text-white" id="myNavBar">
-                <a class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button w3-border-right w3-border-white">Home</a>
+                <a href="home.xhtml" class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button w3-border-right w3-border-white">Home</a>
                 <a class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button">
                     <i class="fa fa-th" style="margin-right: 10px"></i>News</a>
                 <a class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button">
@@ -108,17 +109,19 @@
                 <h2><i class="fa fa-cog" style="margin-right: 10px;"></i>Settings</h2>
                 <hr style=" border-color: black; border: 1.5px solid black" />
                 <i class="fa fa-user-o" style="font-size:28px"></i>
-                <h:inputText style="width: 30%;display: inline"  class="w3-input w3-border-black w3-border-bottom" value="#{User.username}" /> 
+                <h:inputText readonly="#{facesContext.renderResponse}" style="width: 30%;display: inline"
+                    class="w3-input w3-border-black w3-border-bottom" value="#{User.username}" /> 
                 <br/>
                 <i class="fa fa-lock" style="margin-top: 25px;margin-right: 6px;font-size:28px"></i>
-                <h:inputSecret class="w3-input w3-border-black w3-border-bottom" style="width: 30%;display: inline" />
+                <h:inputSecret pt:placeholder="new password" binding="#{password_1}" class="w3-input w3-border-black w3-border-bottom" style="width: 30%;display: inline" />
                 <br/>
                 <i class="fa fa-lock" style="margin-top: 25px;margin-right: 6px;font-size:28px"></i>
-                <h:inputText class="w3-input w3-border-black w3-border-bottom" style="width: 30%;display: inline" />
+                <h:inputSecret pt:placeholder="confirm new password" binding="#{password_2}" class="w3-input w3-border-black w3-border-bottom" style="width: 30%;display: inline" />
                 <br/>
                 <i class="fa fa-lock" style="margin-top: 25px;margin-right: 6px;font-size:28px"></i>
-                <h:inputText class="w3-input w3-border-black w3-border-bottom" style="width: 30%;display: inline"/>
-                <h:commandButton id="butt-sign-in" type="submit" style="width: 33%; margin-top: 20px;background-color: #273c4e" 
+                <h:inputSecret pt:placeholder="current password" binding="#{password_curr}" class="w3-input w3-border-black w3-border-bottom" style="width: 30%;display: inline"/>
+                <h:commandButton action="#{Profile_Service.changePassword(User.username, password_1.value, password_2.value, password_curr.value)}"
+                    style="width: 33%; margin-top: 20px;background-color: #273c4e" 
                     class="w3-button w3-text-white w3-block w3-padding-large w3-round-large" value="Submit"/>
             </h:form>
         </div>
@@ -142,6 +145,8 @@
                                 <span>#{houses.house.owner}</span>
                                 <br/>
                                 <span>#{houses.house.rate}</span>
+                                <br/>
+                                <p>#{houses.house.properties}</p>
                             </div>
                             <h:commandButton action="#{Profile_Service.deliverHouse(User.username, houses.house.address, houses.house.zip_Code, houses.color)}" style="background-color:#{houses.color}; margin:auto; width: 100%; margin-top: 20px;" 
                                 class="w3-button w3-margin-bottom w3-text-white w3-block w3-padding-large w3-round-large" value="#{houses.status}" />
@@ -157,24 +162,24 @@
             <h2 class="w3-justify"><i class="fa fa-plus-circle" style="margin-right: 10px" aria-hidden="true"></i>Adding Houses</h2>
             <hr style=" border-color: black; border: 1.5px solid black" />
             <h:form enctype="multipart/form-data">
-            <div id="content-div" class="w3-row">
-                <div class="w3-half">
-                    Address <h:inputText binding="#{address}" style="width: 100%" class="w3-input w3-border w3-border-black" /><br/>
-                    Zip Code<br/><h:inputText binding="#{zip_code}" style="display:inline; width: 15%" class="w3-input w3-border w3-border-black" /> - 
-                    <h:inputText binding="#{zip_code2}" style="display:inline; width: 10%" class="w3-input w3-border w3-border-black" />
-                    <br/><br/>
-                    Lease
-                    <br/>
-                    <h:inputText binding="#{lease}" style="display:inline;width: 30%" class="w3-input w3-border w3-border-black"/> €
-                    <br/><br/>
-                    Features
-                    <br/>
-                    <h:inputTextarea binding="#{features}" rows="3" cols="40" style="resize:none;height: 200px;width: 100%;background: none;" class="w3-border w3-border-black " />
-                    <br/><br/>
-                    <label for="upload_file" class="custom-file-upload btn btn-primary"><i class="fa fa-cloud-upload"></i> Image Upload</label>
-                    <h:inputFile class="margin" id="upload_file" style="opacity: 0" />
+                <div id="content-div" class="w3-row">
+                    <div class="w3-half">
+                        Address <h:inputText binding="#{address}" style="width: 100%" class="w3-input w3-border w3-border-black" /><br/>
+                        Zip Code<br/><h:inputText binding="#{zip_code}" style="display:inline; width: 15%" class="w3-input w3-border w3-border-black" /> - 
+                        <h:inputText binding="#{zip_code2}" style="display:inline; width: 10%" class="w3-input w3-border w3-border-black" />
+                        <br/><br/>
+                        Lease
+                        <br/>
+                        <h:inputText binding="#{lease}" style="display:inline;width: 30%" class="w3-input w3-border w3-border-black"/> €
+                        <br/><br/>
+                        Features
+                        <br/>
+                        <h:inputTextarea binding="#{features}" rows="3" cols="40" style="resize:none;height: 200px;width: 100%;background: none;" class="w3-border w3-border-black " />
+                        <br/><br/>
+                        <label for="upload_file" class="custom-file-upload btn btn-primary"><i class="fa fa-cloud-upload"></i> Image Upload</label>
+                        <h:inputFile class="margin" id="upload_file" style="opacity: 0" />
+                    </div>
                 </div>
-            </div>
                 <h:commandButton action="#{Profile_Service.insertNewHouse(User.username, address.value, zip_code.value, zip_code2.value, lease.value, features.value)}" style="background-color: #273c4e;width: 50%;margin-top: 20px" 
                 class="w3-button w3-margin-bottom w3-text-white w3-block w3-padding-large w3-round-large" value="Submit"/>
             </h:form>
@@ -194,4 +199,3 @@
         </footer>
     </h:body>
 </html>
-

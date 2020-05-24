@@ -69,12 +69,104 @@ Num sistema distribuído cada evento pode ocorrer em diferentes locais, cada um 
 \begin{itemize}
 	\item \textbf{Tempo Global}, implementa a abstração de um tempo universal, através de um relógio que fornece o mesmo tempo a \textbf{todos} os participantes no sistema;
 	\item \textbf{Tempo Absoluto}, padrões universalmente ajustados, disponíveis como fontes de tempo externo para o qual qualquer relógio interno se pode sincronizar;
-	\item \textbf{Relógio físico local}, o modo mais comum para fornecer uma fonte de tempo num processo
+	\item \textbf{Relógio físico local}, o modo mais comum para fornecer uma fonte de tempo num processo.
+	\begin{itemize}
+	    \item Equipamento físico, que conta as oscilações que ocorrem num cristal de quartzo a uma dada frequência.
+	    \item Cada oscilação do cristal decrementa o contador de uma unidade.
+	    \item Quando o cotador chega a zero, é gerado um \textit{interrupt} e o contador é recarregado com o valor inicial.
+	    \item Cada \textit{interrupt} é designado como um "\textit{clock tick}".
+	\end{itemize}
+	\item Um relógio num processo correto, \textit{k}, implementa uma função \textbf{discreta}, monótona crescente, $pc_k$, que mapeia o tempo real \textit{t} em tempo de relógio $pc_k(t)$.
+	\item Problemas dos relógios físicos:
+	    \begin{itemize}
+	        \item \textbf{Granularidade:} relógios físicos são granulares, isto é, avançam uma unidade em cada\textit{tick}, $t_tk$:
+	        
+	        \[ pc_k ^ {tk+1} - pc_k ^ {tk} = g\]
+	        \begin{itemize}
+	            \item A frequência das oscilações varia com a temperatura.
+	        \item Diferentes taxas de desvio em diferentes computadores.
+	        \end{itemize}
+	        \item \textbf{Taxa de desvio do relógio físico:} existe uma constante positiva $r_p$, a \textit{taxa de desvio (rate of drift)}, que depende não só da qualidade do relógio mas também das condições ambientais.
+	        
+	        \[ 0<= 1-r_p<= (pc_k(t_{tk+1}) - pc_k(t_{tk})) / g <= 1+r_p\]
+	        \[ 0 <= t_{tk} <= t_{tk+1}\]
+	    \end{itemize}
+\end{itemize}
+\section{\textit{Clock skew / Clock drift}}
+
+\begin{itemize}
+    \item \textbf{Skew} - é a diferença do valor do tempo lido de dois relógios diferentes.
+    \item \textbf{Drift} - é a diferença no valor lido de um relógio e o valor do tempo fornecido por um relógio de referência perfeito por unidade de tempo do relógio de referência.
+\end{itemize}
+    \textbf{Ex.} drift de $10^{-5}$ segundos / segundo, significa que em cada segundo o relógio tem um desvio de 0,00001 segundos.
+    
+\section{Para que serve um \textbf{relógio local}?}
+
+\begin{itemize}
+    \item Fornecer \textit{timestamps} para eventos locais.
+    \item Medir durações locais. (O erro causado pelo desvio é insignificante para durações pequenas.)
+    \item Pode ser usado como um "\textit{timer}" para estabelecer \textit{timeouts}.
+    \item Medir durações distribuídas \textit{round-trip}.
 \end{itemize}
 
+\section{\textbf{Relógios Globais} - Características}
 
+\begin{itemize}
+    \item Fornecer  o mesmo tempo para todos os intervenientes do sistema.
+    \item \textit{Timestamping} de eventos distribuídos.
+    \item Medição de durações distribuídas.
+\end{itemize}
 
+\section{\textbf{Relógios Globais} - Funcionamento}
 
+\begin{itemize}
+    \item É criado um relógio virtual $vc_p$ para cada processo $p$ a partir do relógio físico.
+    \item É feita a sincronização de todos os relógios locais com o mesmo valor inicial $vc_p(t_{init})$
+    \item Periodicamente os relógios virtuais são re-sincronizados -> Algoritmos de Sincronização 
+\end{itemize}
+
+\section{\textbf{Relógios Globais} - Propriedades}
+\begin{itemize}
+    \item \underline{Granularidade}: $g_v = vc_p(t_{k+1}) - vc_p(t_k)$
+    \item \underline{Precisão} ($\pi_v$) : quão próximos os relógios se mantêm sincronizados entre si em qualquer instante do tempo. 
+    \item \underline{Exatidão} (\textit{accuracy $-\alpha_v$}): quão próximos os relógios estão sincronizados em relação a uma referência de tempo real absoluto (sincronização externa)
+\end{itemize}
+
+\section{Sincronização interna vs Sincronização externa}
+
+\begin{itemize}
+    \item Sincronização interna:
+    \begin{itemize}
+        \item - relógios têm que obter precisão relativamente a um tempo interno ao sistema
+    \end{itemize}
+    \item Sincronização externa:
+    \begin{itemize}
+        \item - relógios tem que estar sincronizados com uma fonte externa de tempo universal
+    \end{itemize}
+\end{itemize}
+
+\section{Referências de Tempo universal - Normas}
+
+\begin{itemize}
+    \item Tempo Atómico Internacional (TAI) -> função contínua monótona crescente a uma taxa constante.
+    \item \textit{Universal Time, Coordinated (UTC)} -> referência de tempo política (Correção do TAI).
+    \begin{itemize}
+        \item \textbf{- Forma mais simples de obter o UTC}: por GPS - – é assegurada uma exactidão, em terra, <= 100ns para os relógios dos receptores de GPS.
+    \end{itemize}
+
+\end{itemize}
+
+\section{Medição de durações \textit{round-trip}}
+
+\begin{itemize}
+    \item Certas durações distribuídas podem ser medidas sem a existência explícita de relógios globais.
+    \item O atraso de entrega de uma mensagem pode ser calculado com um erro conhecido e limitado, se existir uma mensagem prévia recente no sentido inverso.
+    \item Pré-requisitos para o uso deste método:
+    \begin{itemize}
+        \item Assegurar troca de mensagens frequente entre os sites relevantes
+        \item Assegurar que o timestamping das transmissões de mensagens e entregas, também sejam trocados entre os sites relevantes
+    \end{itemize}
+\end{itemize}
 
 
 \end{document}

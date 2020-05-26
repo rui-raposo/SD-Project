@@ -1,0 +1,152 @@
+\documentclass{article}
+\usepackage{quoting}
+\usepackage{datetime}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{listings}
+\setcounter{secnumdepth}{4}
+\date{\today \\ \currenttime} 
+\title{Sistemas Distribuídos}
+\author{Rui Raposo / António Sardinha}
+\UseRawInputEncoding
+
+\begin{document}
+\maketitle
+
+\section{Java Bean} -- Standard para definição de classes reutilizáveis
+
+Classe Java que:
+\begin{itemize}
+	\item Tem todas as propriedades privadas;
+	\item Métodos públicos (\textit{getters} e \textit{setters}) acedem às propriedades;
+	\item Tem um construtor sem parâmetros;
+	\item Implementa a interface \textit{Serializable}.
+\end{itemize}
+
+\textbf{Componente executada do lado do servidor que implementa a lógica da aplicação/negócio}.
+
+O EJB \textit{container} oferece os serviços do sistema para:
+\begin{itemize}
+	\item Gestão de transações;
+	\item Segurança;
+	\item Concorrência;
+	\item Escalabilidade.
+\end{itemize}
+
+\subsection{Tipos de EJB}
+
+\subsubsection{\textit{Session Beans}}
+
+\begin{itemize}
+	\item Implementam um tarefa para a aplicação cliente;
+	\item Opcionalmente podem implementar um \textit{web service}.
+\end{itemize}
+
+\begin{enumerate}
+	\item \textit{Stateful};
+	\item \textit{Stateless};
+	\item \textit{Singleton}.
+\end{enumerate}
+
+\subsubsection{\textit{Message-Driven Beans}}
+
+Atuam como \textit{listeners} para um determinado tipo de mensagens.
+
+\subsection{Acesso a \textit{session Beans}}
+
+O cliente de um \textit{session Bean} obtém a referência para uma instância do \textit{Bean} por:
+
+\begin{itemize}
+	\item \textit{Dependency injection};
+	\item JNDI (\textit{Java Naming and Directory Interface}).
+\end{itemize}
+
+O cliente tem acesso a um \textit{session Bean} através dos métodos de uma interface ou através dos métodos públicos do \textit{Bean}.
+
+\textbf{3 Tipos de acesso}:
+
+\begin{itemize}
+	\item Local;
+	\item Remoto;
+	\item Como \textit{web service}.
+\end{itemize}
+
+\begin{itemize}
+
+\item \textbf{Local} -- contexto local (JVM) do servidor
+\begin{lstlisting}[language=Java]
+   @Local
+   public interface ExampleLocal {...}
+\end{lstlisting}
+
+\item \textbf{Remote} -- interface remota (dentro ou fora da JVM)
+\begin{lstlisting}[language=Java]
+   @Remote
+   public interface ExampleRemote {...}
+\end{lstlisting}
+
+\item \textbf{\textit{Web Service}} -- serviço sobre \textit{HTTP}
+\begin{lstlisting}[language=Java]
+   @WebService
+   public interface InterfaceName {...}
+\end{lstlisting}
+
+\item \textbf{\textit{Dependency Injection}}
+\begin{lstlisting}[language=Java]
+@EJB
+Example example
+\end{lstlisting}
+
+O habitual \textit{lookup} pode ser substituído pela anotação $@EJB$ em que o servidor $JEE$ implicitamente injeta o código para obter o EJB referenciado.
+
+\end{itemize}
+
+\subsection{\textit{Stateful Session Beans} -- Caraterísticas}
+
+\begin{itemize}
+	\item Cada instância de um Stateful Bean está associada a um único cliente;
+	\item O Bean mantém o estado de sessão (não partilhado) com um dado cliente (estado = valores das variáveis de instância);
+	\item Permitem guardar informação do cliente entre múltiplas invocações;
+	\item Possuem um tempo de vida (configurável) até serem removidos.
+\end{itemize}
+
+\subsection{\textit{Stateless Session Beans} -- Caraterísticas}
+
+\begin{itemize}
+	\item Não mantêm informação específica de um cliente;
+	\item O estado existe apenas durante a invocação de um método;
+	\item O servidor gere uma \textit{pool} de instâncias que servem pedidos de vários clientes;
+	\item Interface pode ser exposta como \textit{web service}.
+\end{itemize}
+
+\subsection{\textit{Singleton Session Beans} -- Caraterísticas}
+
+\begin{itemize}
+	\item Instanciado apenas \textbf{uma vez por aplicação};
+	\item Estado partilhado entre \textbf{todos os clientes};
+	\item Estado preservado entre invocações;
+	\item Anotação $@Startup$ indica que deve ser instanciado no arranque da aplicação.
+\end{itemize}
+
+\section{\textit{Message Driven Beans}}
+
+\subsection{\textit{Message Driven Beans} -- Caraterísticas}
+
+\begin{itemize}
+	\item Consiste num recetor \textbf{assíncrono} de mensagens Java;
+	\item Não mantém estado;
+	\item Um \textit{Meesage Driven Bean} pode processar mensagens de múltiplos clientes;
+	\item O cliente não acede diretamente à interface do \textit{Message Driven Beans}, usa um serviço de mensagens:
+		\begin{itemize}
+			\item JMS -- \textit{Java Messaging Service};
+		\end{itemize}
+\end{itemize} 
+
+\subsection{\textit{Message Driven Beans} -- Funcionamento}
+
+\begin{itemize}
+	\item As mensagens do cliente são enviadas para uma \textit{queue} Java e posteriormente entregues ao \textit{Message Driven Beans};
+	\item O nomee da \textit{queue} é indicado na anotação $@MessageDriven$ do \textit{Message Driven Beans} que se torna automaticamente (sem código adicional) num consumidor;
+\end{itemize}
+
+\end{document}

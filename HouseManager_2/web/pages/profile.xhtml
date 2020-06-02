@@ -1,0 +1,232 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+        <title>Facelet Title</title>
+    </h:head>
+
+    <style type="text/css">
+        body, html, h1, p, h2, h3 {
+            line-height: 1.5;
+            color: black;
+            font-family: Verdana, Geneva, sans-serif;
+        }
+
+        input{
+            outline-width: 0;
+            background: none;
+        }
+
+        .round-photo {
+            width:100%;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            height: 250px;
+            object-fit:cover;
+        }
+
+        .imagewrap {display:inline-block;position:relative;}
+        .button1 {position:absolute;bottom:0;left:0;}
+
+        #upload_file 
+        {
+            display: none;
+        }
+
+        .btn-primary {
+            background-color: gray;
+            border-color: white;
+            color: white;
+            pointer-events: auto;
+        }
+
+        .btn {
+            -moz-user-select: none;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+            display: inline-block;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            padding: 0.375rem 0.75rem;
+            text-align: center;
+            transition: color 0.15s ease-in-out 0s, background-color 0.15s ease-in-out 0s, border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+        
+    </style>
+
+    <h:body>
+
+        <!-- Valid Data --> 
+        <f:metadata>
+            <f:viewAction action = "#{User.validUserData('home.xhtml')}"></f:viewAction>
+            <f:viewAction action = "#{Profile_Service.updateHousesList(User.username)}"></f:viewAction>
+        </f:metadata>
+
+        <!-- Sidebar -->
+        <div class="w3-sidebar w3-blue w3-bar-block" style="width:15%">
+          <div class="w3-padding-64 w3-center w3-container">
+            <img src="images/bird-3.png"/>
+          </div>
+          <div class="w3-center">
+            <a href="#news" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
+                News</a>
+            <a href="#my-houses" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
+                Houses</a>
+            <a href="#about" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
+                About</a>
+            <a href="#team" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
+                Team</a>
+            <a href="#faq" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
+                FAQ</a>
+            <a href="profile.xhtml" style="font-size: 18px" class="w3-center w3-padding-16 w3-hover-deep-orange w3-bar-item w3-hover-opacity w3-button w3-right">
+                Profile</a>
+            <a href="intro.xhtml" style="font-size: 18px" class="w3-center w3-padding-16 w3-hover-deep-orange w3-bar-item w3-hover-opacity w3-button w3-right">
+                Logout</a>
+            </div>
+        </div>
+        
+        <div id="rest" class="w3-container" style="margin-left: 20%">
+            
+            <div id="title" class="w3-justify w3-container w3-padding-64" style="margin-left: 5%; margin-right: 10%;">
+                <h:form>
+                    <h2 style="color: #273c4e">Settings</h2>
+                    <hr style="border-color: #273c4e; border: 1.5px solid #273c4e" />
+                    <i class="fa fa-user-o" style="margin-right: 6px;font-size:28px"></i>
+                    <h:inputText readonly="#{facesContext.renderResponse}" style="width: 30%;display: inline"
+                        class="w3-input w3-border-black w3-border w3-border-black" value="#{User.username}" /> 
+                    <br/>
+                    <i class="fa fa-lock" style="margin-top: 25px;margin-right: 12px;font-size:28px"></i>
+                    <h:inputSecret pt:placeholder="new password" binding="#{password_1}" class="w3-input w3-border w3-border-black" style="width: 30%;display: inline" />
+                    <br/>
+                    <i class="fa fa-lock" style="margin-top: 25px;margin-right: 12px;font-size:28px"></i>
+                    <h:inputSecret pt:placeholder="confirm new password" binding="#{password_2}" class="w3-input w3-border w3-border-black" style="width: 30%;display: inline" />
+                    <br/>
+                    <i class="fa fa-lock" style="margin-top: 25px;margin-right: 12px;font-size:28px"></i>
+                    <h:inputSecret pt:placeholder="current password" binding="#{password_curr}" class="w3-input w3-border w3-border-black" style="width: 30%;display: inline"/>
+                    <h:commandButton action="#{Profile_Service.changePassword(User.username, password_1.value, password_2.value, password_curr.value)}"
+                    style="width: 30%; margin-top: 10px; margin-left: 30px" 
+                    class="w3-button w3-text-white w3-deep-orange w3-hover-deep-orange w3-hover-opacity w3-block w3-padding-large" value="Submit"/>
+                </h:form>
+            </div>
+            
+            
+            <!-- List Houses -->
+            <div id="my-houses" class="w3-justify w3-container w3-padding-64" style="margin-right: 10%; margin-left: 5%;margin-top: 50px;">
+                <h2 style="color: #273c4e" class="w3-justify">My Houses</h2>
+                <hr style=" border-color: #273c4e; border: 1.5px solid #273c4e" />
+                <ul style="height: auto;" class="w3-margin-top w3-ul" >
+                    <h:form>
+                        <ui:repeat value="#{Profile_Service.myHouses}" var="houses">
+                            <li id="list_#{houses.house.address}#{houses.house.zip_Code}" style="width: 30%;margin-right: 15px;margin-left: 25px;border-top-right-radius: 25px;
+                                border-top-left-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;"
+                                class="w3-col w3-margin-bottom w3-card-4 w3-padding-16 w3-border-white w3-justify">
+                                <div class="imagewrap">
+                                    <img id="img_#{houses.house.address}#{houses.house.zip_Code}" src="images/casa-de-neve.jpg" class="round-photo w3-bar-item" />
+                                    <div class="w3-row">
+                                        <div class="w3-col " style="width:90%">
+                                            <h:commandButton action="#{Profile_Service.deliverHouse(User.username, houses.house.address, houses.house.zip_Code, houses.color)}" style="background-color:#{houses.color}; margin:auto; width: 100%;" 
+                                    class="w3-button w3-margin-bottom w3-text-white w3-block" value="#{houses.status}" />
+                                        </div>
+                                        <div style="height: 38px" class="w3-light-gray w3-hover-gray w3-center w3-rest">
+                                            <a onclick="something(id)" id="id_#{houses.house.address}#{houses.house.zip_Code}_down" href="#img_#{houses.house.address}#{houses.house.zip_Code}"><img style="margin-top:8px" src="images/down-arrow.png" /></a>
+                                            <a onclick="something(id)" id="id_#{houses.house.address}#{houses.house.zip_Code}_up" style="display:none" href="#img_#{houses.house.address}#{houses.house.zip_Code}"><img style="margin-top:8px" src="images/up-arrow.png" /></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="id_#{houses.house.address}#{houses.house.zip_Code}_data" style="display:none; margin-top: 50px" class="w3-animate-top w3-animate-opacity w3-bar-item">
+                                    <span class="w3-large">#{houses.house.address}</span>
+                                    <br/>
+                                    <span>#{houses.house.zip_Code}</span>
+                                    <br/>
+                                    <span>#{houses.house.price}</span>
+                                    <br/>
+                                    <span>#{houses.house.owner}</span>
+                                    <br/>
+                                    <span>#{houses.house.rate}</span>
+                                    <br/>
+                                    <p>#{houses.house.properties}</p>
+                                </div>
+                            </li>
+                        </ui:repeat>
+                    </h:form>
+                </ul>
+            </div>
+            
+            
+            <!-- Adding House -->
+            <div id="my-houses" class="w3-justify w3-container w3-padding-64" style="margin-right: 10%; margin-left: 5%;margin-top: 50px;">
+                <h2 style="color: #273c4e" class="w3-justify">Adding Houses</h2>
+                <hr style=" border-color: #273c4e; border: 1.5px solid #273c4e" />
+                <h:form enctype="multipart/form-data">
+                    <div id="content-div" class="w3-row">
+                        <div class="w3-half">
+                            Address <h:inputText binding="#{address}" style="width: 100%" class="w3-input w3-border w3-border-black" /><br/>
+                            Zip Code<br/><h:inputText binding="#{zip_code}" style="display:inline; width: 15%" class="w3-input w3-border w3-border-black" /> - 
+                            <h:inputText binding="#{zip_code2}" style="display:inline; width: 10%" class="w3-input w3-border w3-border-black" />
+                            <br/><br/>
+                            Lease
+                            <br/>
+                            <h:inputText binding="#{lease}" style="display:inline;width: 30%" class="w3-input w3-border w3-border-black"/> €
+                            <br/><br/>
+                            Features
+                            <br/>
+                            <h:inputTextarea binding="#{features}" rows="3" cols="40" style="resize:none;height: 200px;width: 100%;background: none;" class="w3-border w3-border-black " />
+                            <br/><br/>
+                            <label for="upload_file" class="custom-file-upload btn btn-primary"><i class="fa fa-cloud-upload"></i> Image Upload</label>
+                            <h:inputFile class="margin" id="upload_file" style="opacity: 0" />
+                        </div>
+                    </div>
+                    <h:commandButton action="#{Profile_Service.insertNewHouse(User.username, address.value, zip_code.value, zip_code2.value, lease.value, features.value)}" style="background-color: #273c4e;width: 50%;margin-top: 20px" 
+                    class="w3-button w3-margin-bottom w3-text-white w3-block w3-padding-large w3-deep-orange w3-hover-deep-orange w3-hover-opacity" value="Submit"/>
+                </h:form>
+            </div>
+        </div>
+
+    </h:body>
+    
+    <script type="text/javascript">
+        
+        function something(id){
+            
+            var last2 = id.slice(-2);
+            var specific_item = "";
+            
+            if(last2 == "up"){
+                specific_item = id.substr(3, id.length - 6);
+                // hide
+                document.getElementById("id_"+specific_item+"_up").style.display = "none";
+                document.getElementById("id_"+specific_item+"_data").style.display = "none";
+                // show
+                document.getElementById("id_"+specific_item+"_down").style.display = "block";
+                // height
+                document.getElementById("list_"+specific_item).style.height = "auto";
+                document.getElementById("list_"+specific_item).style.background = "white";
+            }
+            else{
+                specific_item = id.substr(3, id.length - 8);
+                // hide
+                document.getElementById("id_"+specific_item+"_down").style.display = "none";
+                document.getElementById("id_"+specific_item+"_data").style.display = "block";
+                // show
+                document.getElementById("id_"+specific_item+"_up").style.display = "block";
+                // height
+                document.getElementById("list_"+specific_item).style.height = "668px";
+                document.getElementById("list_"+specific_item).style.background = "rgb(255,255,255)";
+                document.getElementById("list_"+specific_item).style.background = "linear-gradient(180deg, rgba(255,255,255,1) 52%, rgba(255,182,110,1) 80%, rgba(78,182,255,1) 96%)";
+            }
+        } 
+        
+   </script>
+    
+</html>

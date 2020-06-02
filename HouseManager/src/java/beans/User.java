@@ -121,6 +121,8 @@ public class User implements Serializable{
             return;
         
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        this.username = username;
+        this.password = pw;
         response.sendRedirect("home.xhtml");
 
     }

@@ -19,26 +19,22 @@
             font-family: Verdana, Geneva, sans-serif;
         }
 
-        a.active:hover{
-            background: #F99A05;
-        }
-
         .round-photo {
-            width:200px;
-            height:200px;
+            width:100%;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            height: 250px;
             object-fit:cover;
         }
+        
+        .imagewrap {display:inline-block;position:relative;}
+        .button1 {position:absolute;bottom:0;left:0;}
 
-        .round-photo-icon {
-            width:50px;
-            height:50px;
-            object-fit:cover;
-            border-radius:50%;
-        }
+    
     </style>
 
     <h:body>
-
+        
         <!-- Valid Data --> 
         <f:metadata>
             <!--<f:viewAction action = "#{User.validUserData('home.xhtml')}"></f:viewAction>-->
@@ -46,20 +42,20 @@
         </f:metadata>
         
         <!-- Sidebar -->
-        <div class="w3-sidebar w3-blue w3-bar-block" style="width:15%">
+        <div id="sidebar" class="w3-sidebar w3-blue w3-bar-block" style="width:15%">
           <div class="w3-padding-64 w3-center w3-container">
             <img src="images/bird-3.png"/>
           </div>
           <div class="w3-center">
-            <a href="#news" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
+            <a id="news-id" href="#news" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
                 News</a>
-            <a href="#my-houses" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
+            <a id="myhouses-id" href="#my-houses" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
                 Houses</a>
-            <a href="#about" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
+            <a id="about-id" href="#about" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
                 About</a>
-            <a href="#team" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
+            <a id="team-id" href="#team" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
                 Team</a>
-            <a href="#faq" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
+            <a id="faq-id" href="#faq" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
                 FAQ</a>
             <c:choose>
                 <c:when test="#{User.username != ''}" >
@@ -99,12 +95,26 @@
             <div id="my-houses" class="w3-justify w3-container w3-padding-64" style="margin-right: 10%; margin-left: 5%;margin-top: 50px;">
                 <h2 style="color: #273c4e" class="w3-justify"><b>Houses</b></h2>
                 <hr style=" border-color: #273c4e; border: 1.5px solid #273c4e"/>
-                <ul style="" class="w3-margin-top w3-ul w3-card-4" >
+                <ul style="height: auto;" class="w3-margin-top w3-ul" >
                     <h:form>
                         <ui:repeat value="#{Home_Service.list_houses}" var="list">
-                            <li class="w3-bar w3-half w3-justify">
-                                <img src="images/casa-de-neve.jpg" class="round-photo w3-bar-item" style="width:200px" />
-                                <div class="w3-bar-item">
+                            <li id="list_#{list.address}#{list.zip_Code}" class="w3-col w3-margin-bottom w3-card-4 w3-padding-16 w3-border-white w3-justify" 
+                                style="width: 30%;margin-right: 15px;margin-left: 25px;border-top-right-radius: 25px;
+                                border-top-left-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;">
+                                <div class="imagewrap">
+                                    <img id="img_#{list.address}#{list.zip_Code}" src="images/casa-de-neve.jpg" class="round-photo w3-bar-item" style="" />
+                                    <div class="w3-row">
+                                        <div class="w3-col " style="width:90%">
+                                            <h:commandButton action="#{Home_Service.requestHouse(User.username, list.address, list.zip_Code)}" style="margin:auto; width: 100%; " 
+                                            class="w3-button w3-text-white w3-hover-deep-orange w3-hover-opacity w3-deep-orange" value="Request" />
+                                        </div>
+                                        <div style="height: 38px" class="w3-light-gray w3-hover-gray w3-center w3-rest">
+                                            <a onclick="something(id)" id="id_#{list.address}#{list.zip_Code}_down" href="#img_#{list.address}#{list.zip_Code}"><img style="margin-top:8px" src="images/down-arrow.png" /></a>
+                                            <a onclick="something(id)" id="id_#{list.address}#{list.zip_Code}_up" style="display:none" href="#img_#{list.address}#{list.zip_Code}"><img style="margin-top:8px" src="images/up-arrow.png" /></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="id_#{list.address}#{list.zip_Code}_data" style="display:none; margin-top: 50px" class="w3-animate-top w3-animate-opacity w3-bar-item">
                                     <span class="w3-large">#{list.address}</span>
                                     <br/>
                                     <span>#{list.zip_Code}</span>
@@ -117,87 +127,85 @@
                                     <br/>
                                     <p>#{list.properties}</p>
                                 </div>
-                                <h:commandButton action="#{Home_Service.requestHouse(User.username, list.address, list.zip_Code)}" style="margin:auto; width: 100%; margin-top: 20px;" 
-                                    class="w3-button w3-margin-bottom w3-text-white w3-block w3-padding-large w3-deep-orange" value="Request" />
                             </li>
                         </ui:repeat>
                     </h:form>
                 </ul>
             </div>
             
-            <div id="about" class="w3-justify w3-container w3-padding-64" style="margin-left: 5%; margin-right: 10%; margin-top: 50px">
-            <h2 style="color: #273c4e"><b>About</b></h2>
-            <hr style="border-color: #273c4e; border: 1.5px solid #273c4e"/>	
-            <p> This project approaches the two sides of the investment on real estate.
-                On one side we have the investor that wants to place his properties to rent; in the other hand, we have the client 
-                that is looking for a property to rent and consequently inhabit.
-            </p>
-            <p> In an attempt to support both sides, we focus on develop a simple and intuitive website. We provide the following functionalities:
-                <li>Insert a property;</li>
-                <li>Request a property;</li>
-                <li>Book a property;</li>
-                <li>Remove a property;</li>
-                <li>Consult a property.</li>
-            </p>
-            <p>
-                Due to this, the work plan is divided into five research and development activities, and the report writing.
-            </p>
+            <div id="about" class="w3-justify w3-container w3-padding-64" style="margin-top: 50px; margin-left: 5%; margin-right: 10%;">
+                <h2 style="color: #273c4e"><b>About</b></h2>
+                <hr style="border-color: #273c4e; border: 1.5px solid #273c4e"/>	
+                <p> This project approaches the two sides of the investment on real estate.
+                    On one side we have the investor that wants to place his properties to rent; in the other hand, we have the client 
+                    that is looking for a property to rent and consequently inhabit.
+                </p>
+                <p> In an attempt to support both sides, we focus on develop a simple and intuitive website. We provide the following functionalities:
+                    <li>Insert a property;</li>
+                    <li>Request a property;</li>
+                    <li>Book a property;</li>
+                    <li>Remove a property;</li>
+                    <li>Consult a property.</li>
+                </p>
+                <p>
+                    Due to this, the work plan is divided into five research and development activities, and the report writing.
+                </p>
 
-            <!-- Activity -->
-            <i class="fa fa-code" aria-hidden="true"></i> 1.  Contextualization with the proposed goals and work environment setup
-            <br/>
-            <label style="font-size: 10px">Starting at week 0 and ending at week 1.</label>
-            <div id="id-bar-section1" class="w3-center">
-                <div class="w3-border w3-border-gray">
-                    <div id="bar1" class="w3-deep-orange" style="color:white;width:100%">100%</div>
-                </div>
-            </div>	
-            <br/>
-            <i class="fa fa-code" aria-hidden="true"></i> 2. Definition of all the frameworks to be used in this project
-            <br/>
-            <label style="font-size: 10px">Starting at week 0 and ending at week 1.</label>
-            <div id="id-bar-section2" class="w3-center">
-                <div class="w3-border w3-border-gray">
-                    <div id="bar2" class="w3-deep-orange" style="color:white;width:100%">100%</div>
-                </div>
-            </div>	
-            <br/>
-            <i class="fa fa-code" aria-hidden="true"></i> 3. Backend implementation
-            <br/>
-            <label style="font-size: 10px">Starting at week 1 and ending at week 3.</label>
-            <div id="id-bar-section3" class="w3-center">
-                <div class="w3-border w3-border-gray">
-                    <div id="bar3" class="w3-deep-orange" style="color:white;width:65%">65%</div>
-                </div>
-            </div>	
-            <br/>
-            <i class="fa fa-code" aria-hidden="true"></i> 4. Frontend implementation
-            <br/>
-            <label style="font-size: 10px">Starting at week 2 and ending at week 3.</label>
-            <div id="id-bar-section4" class="w3-center">
-                <div class="w3-border w3-border-gray">
-                    <div id="bar4" class="w3-deep-orange" style="color:white;width:60%">60%</div>
-                </div>
-            </div>	
-            <br/>
-            <i class="fa fa-code" aria-hidden="true"></i> 5. Analysis and system tests
-            <br/>
-            <label style="font-size: 10px">Starting at week 3 and ending at week 4.</label>
-            <div id="id-bar-section5" class="w3-center">
-                <div class="w3-border w3-border-black">
-                    <div id="bar5" style="color:white;background-color:#273c4e;width:0%">0</div>
-                </div>
-            </div>	
-            <br/>
-            <i class="fa fa-code" aria-hidden="true"></i> 6. Report
-            <br/>
-            <label style="font-size: 10px">Starting at week 0 and ending at week 4.</label>
-            <div id="id-bar-section6" class="w3-center">
-                <div class="w3-border w3-border-black">
-                    <div id="bar6" style="color:white;background-color:#273c4e;width:0%">0</div>
-                </div>
-            </div>	
-        </div>
+                <!-- Activity -->
+                <i class="fa fa-code" aria-hidden="true"></i> 1.  Contextualization with the proposed goals and work environment setup
+                <br/>
+                <label style="font-size: 10px">Starting at week 0 and ending at week 1.</label>
+                <div id="id-bar-section1" class="w3-center">
+                    <div class="w3-border w3-border-gray">
+                        <div id="bar1" class="w3-deep-orange" style="color:white;width:100%">100%</div>
+                    </div>
+                </div>	
+                <br/>
+                <i class="fa fa-code" aria-hidden="true"></i> 2. Definition of all the frameworks to be used in this project
+                <br/>
+                <label style="font-size: 10px">Starting at week 0 and ending at week 1.</label>
+                <div id="id-bar-section2" class="w3-center">
+                    <div class="w3-border w3-border-gray">
+                        <div id="bar2" class="w3-deep-orange" style="color:white;width:100%">100%</div>
+                    </div>
+                </div>	
+                <br/>
+                <i class="fa fa-code" aria-hidden="true"></i> 3. Backend implementation
+                <br/>
+                <label style="font-size: 10px">Starting at week 1 and ending at week 3.</label>
+                <div id="id-bar-section3" class="w3-center">
+                    <div class="w3-border w3-border-gray">
+                        <div id="bar3" class="w3-deep-orange" style="color:white;width:65%">65%</div>
+                    </div>
+                </div>	
+                <br/>
+                <i class="fa fa-code" aria-hidden="true"></i> 4. Frontend implementation
+                <br/>
+                <label style="font-size: 10px">Starting at week 2 and ending at week 3.</label>
+                <div id="id-bar-section4" class="w3-center">
+                    <div class="w3-border w3-border-gray">
+                        <div id="bar4" class="w3-deep-orange" style="color:white;width:60%">60%</div>
+                    </div>
+                </div>	
+                <br/>
+                <i class="fa fa-code" aria-hidden="true"></i> 5. Analysis and system tests
+                <br/>
+                <label style="font-size: 10px">Starting at week 3 and ending at week 4.</label>
+                <div id="id-bar-section5" class="w3-center">
+                    <div class="w3-border w3-border-black">
+                        <div id="bar5" style="color:white;background-color:#273c4e;width:0%">0</div>
+                    </div>
+                </div>	
+                <br/>
+                <i class="fa fa-code" aria-hidden="true"></i> 6. Report
+                <br/>
+                <label style="font-size: 10px">Starting at week 0 and ending at week 4.</label>
+                <div id="id-bar-section6" class="w3-center">
+                    <div class="w3-border w3-border-black">
+                        <div id="bar6" style="color:white;background-color:#273c4e;width:0%">0</div>
+                    </div>
+                </div>	
+            </div>
             
         <!-- Team -->
         <div id="team" class="w3-container w3-justify w3-padding-64" style="margin-left: 5%; margin-right: 10%; margin-top: 50px">
@@ -254,5 +262,52 @@
         </div>
 
     </h:body>
+    
+    <script type="text/javascript">
+        
+
+        
+        
+        function something(id){
+            
+            var last2 = id.slice(-2);
+            var specific_item = "";
+            
+            if(last2 == "up"){
+                specific_item = id.substr(3, id.length - 6);
+                // hide
+                document.getElementById("id_"+specific_item+"_up").style.display = "none";
+                document.getElementById("id_"+specific_item+"_data").style.display = "none";
+                // show
+                document.getElementById("id_"+specific_item+"_down").style.display = "block";
+                // height
+                document.getElementById("list_"+specific_item).style.height = "auto";
+                document.getElementById("list_"+specific_item).style.background = "white";
+            }
+            else{
+                specific_item = id.substr(3, id.length - 8);
+                // hide
+                document.getElementById("id_"+specific_item+"_down").style.display = "none";
+                document.getElementById("id_"+specific_item+"_data").style.display = "block";
+                // show
+                document.getElementById("id_"+specific_item+"_up").style.display = "block";
+                // height
+                document.getElementById("list_"+specific_item).style.height = "668px";
+                document.getElementById("list_"+specific_item).style.background = "rgb(255,255,255)";
+                document.getElementById("list_"+specific_item).style.background = "linear-gradient(180deg, rgba(255,255,255,1) 52%, rgba(255,182,110,1) 80%, rgba(78,182,255,1) 96%)";
+            }
+        }
+        
+        
+        
+        
+        
+        
+   </script>
+    
+    
 </html>
+
+
+
 

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="https://xmlns.jcp.org/xml/ns/javaee" uri="www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/index.html"/>
-    <system systemId="https://www.w3.org/2001/XMLSchema-instance" uri="www.w3.org/2001/xmlschema-instance"/>
-</catalog>

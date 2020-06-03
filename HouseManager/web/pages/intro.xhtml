@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <link rel="icon" type="image/png" href="images/bird.png" />
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
@@ -22,7 +23,8 @@
 
         @font-face {
             font-family: 'CandyPop-';
-            src: url('syle/CandyPop-.eot?#iefix') format('embedded-opentype'),  url('style/CandyPop-.woff') format('woff'), url('style/CandyPop-.ttf')  format('truetype'), url('style/CandyPop-.svg#CandyPop!') format('svg');
+            src: url('syle/CandyPop-.eot?#iefix') format('embedded-opentype'),  url('style/CandyPop-.woff') format('woff'), url('style/CandyPop-.ttf')  
+                format('truetype'), url('style/CandyPop-.svg#CandyPop!') format('svg');
             font-weight: normal;
             font-style: normal;
         }
@@ -66,6 +68,8 @@
     </style>
 
     <h:body>
+        
+        <bgsound src="audio/sound.mp3" loop="infinite"/>
 
         <!-- Valid Data -->
         <f:metadata>
@@ -78,7 +82,8 @@
         <div class="w3-row" style="background: transparent;">
             <h:form>
                 <div id="image_id" style="position: absolute; margin-top: 17%" class="w3-container w3-justify  w3-half">
-                    <img style="margin-right: 50px;margin-top: 6%;margin-bottom: 20px" class="w3-animate-opacity " src="images/bird-4.png" /> 
+                    <img id="img_1" style="display:block;margin-right: 50px;margin-top: 6%;margin-bottom: 20px" class="w3-animate-opacity " src="images/bird-4.png" /> 
+                    <img id="img_2" style="display:none; margin-right: 70px;margin-top: 6%;margin-bottom: 50px" src="images/ezgif.com-crop.gif" /> 
                 </div>
                 <div id="login-form" class="w3-container w3-half w3-justify w3-border-left w3-padding-64 w3-right " style="opacity: 0.02">
                     <i class="fa fa-user-o" style="margin-left: 50px; margin-right: 6px;font-size:28px"></i>
@@ -88,11 +93,13 @@
                     <h:inputSecret class="w3-input" binding="#{password}" style="border: solid 1px black; width: 20%;display: inline" required="" />
                     <br/>
                     <h:commandButton id="butt-sign-in" type="submit" style="display:inline;margin:auto; width: 20%; 
-                                     margin-top: 15px;margin-left: 78px" class="w3-button w3-text-white w3-blue w3-hover-blue w3-hover-opacity w3-block w3-padding-large " 
+                                     margin-top: 15px;margin-left: 78px" class="w3-button w3-text-white w3-blue w3-hover-blue w3-hover-opacity 
+                                     w3-block w3-padding-large " 
                                      value="Sign In" action="#{User.signInFunction(username.value, password.value)}" />
+                    
                     <br/>
-                    <h:button outcome="home.xhtml" style="margin-top: 10px;margin-left: 78px; display: inline;width: 20%;" class="w3-button w3-hover-deep-orange w3-deep-orange
-                              w3-hover-opacity w3-text-white w3-block  w3-padding-large w3-margin-bottom" value="Guest" />
+                    <h:button outcome="home.xhtml" style="margin-top: 10px;margin-left: 78px; display: inline;width: 20%;" class="w3-button w3-hover-deep-orange
+                              w3-deep-orange w3-hover-opacity w3-text-white w3-block  w3-padding-large w3-margin-bottom" value="Guest" />
                 </div>
             </h:form>
         </div>
@@ -100,11 +107,14 @@
         <div id="register" class="w3-animate-bottom w3-center w3-container">
             <a style="font-size: 19px;" href="regist.xhtml">Register Now</a>
         </div>
-
+        
+        <h:panelGroup rendered="#{User.checkFlag()}">
+            <ui:insert><ui:include src="error.xhtml"></ui:include></ui:insert>
+        </h:panelGroup>
+        
     </h:body>
 
     <script>
-
         var elem = document.getElementById("image_id");
         var elem2 = document.getElementById("login-form");
         var pos = 0;
@@ -119,8 +129,10 @@
             else if (reach_y == 0)
                 reach_y = 200;
 
-            if (pos == 610) {
+            if (pos == 560) {
                 clearInterval(id);
+                document.getElementById("img_1").style.display = "none";
+                document.getElementById("img_2").style.display = "block";
             } else {
                 pos += 2;
                 if (reach_y > 0) {
@@ -137,10 +149,6 @@
                 elem.style.left = pos + 'px';
             }
         }
-
-
-
-
     </script>
 
 </html>

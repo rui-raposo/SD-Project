@@ -1,255 +1,241 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-    <h:head>
-        <link rel="icon" type="image/png" href="images/bird.png" />
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-        <title>Home</title>
-    </h:head>
-
-    <style type="text/css">
-        body, html, h1, p, h2, h3 {
-            line-height: 1.5;
-            color: black;
-            font-family: Verdana, Geneva, sans-serif;
-        }
-
-        .round-photo {
-            width:100%;
-            border-top-left-radius: 25px;
-            border-top-right-radius: 25px;
-            height: 250px;
-            object-fit:cover;
-        }
-        
-        .imagewrap {display:inline-block;position:relative;}
-        .button1 {position:absolute;bottom:0;left:0;}
-
-    
-    </style>
-
-    <h:body>
-        
-        <!-- Valid Data --> 
-        <f:metadata>
-            <!--<f:viewAction action = "#{User.validUserData('home.xhtml')}"></f:viewAction>-->
-            <f:viewAction action = "#{Home_Service.updateHousesArray(User.username)}"></f:viewAction>
-        </f:metadata>
-        
-        <!-- Sidebar -->
-        <div id="sidebar" class="w3-sidebar w3-blue w3-bar-block" style="width:15%">
-          <div class="w3-padding-64 w3-center w3-container">
+   xmlns:h="http://xmlns.jcp.org/jsf/html"
+   xmlns:f="http://xmlns.jcp.org/jsf/core"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+   <h:head>
+      <link rel="icon" type="image/png" href="images/bird.png" />
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      </link>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      </link>
+      <title>Home</title>
+   </h:head>
+   <style type="text/css">
+      body, html, h1, p, h2, h3 {
+      line-height: 1.5;
+      color: black;
+      font-family: Verdana, Geneva, sans-serif;
+      }
+      .round-photo {
+      width:100%;
+      border-top-left-radius: 25px;
+      border-top-right-radius: 25px;
+      height: 250px;
+      object-fit:cover;
+      }
+      .imagewrap {display:inline-block;position:relative;}
+      .button1 {position:absolute;bottom:0;left:0;}
+   </style>
+   <h:body>
+      <!-- Valid Data --> 
+      <f:metadata>
+         <!--<f:viewAction action = "#{User.validUserData('home.xhtml')}"></f:viewAction>-->
+         <f:viewAction action = "#{Home_Service.updateHousesArray(User.username)}"></f:viewAction>
+      </f:metadata>
+      <!-- Sidebar -->
+      <div id="sidebar" class="w3-sidebar w3-blue w3-bar-block" style="width:15%">
+         <div class="w3-padding-64 w3-center w3-container">
             <img src="images/bird-3.png"/>
-          </div>
-          <div class="w3-center">
+         </div>
+         <div class="w3-center">
             <a id="news-id" href="#news" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
-                News</a>
+            News</a>
             <a id="myhouses-id" href="#my-houses" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
-                Houses</a>
+            Houses</a>
             <a id="about-id" href="#about" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
-                About</a>
+            About</a>
             <a id="team-id" href="#team" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
-                Team</a>
+            Team</a>
             <a id="faq-id" href="#faq" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
-                FAQ</a>
+            FAQ</a>
             <c:choose>
-                <c:when test="#{User.username != ''}" >
-                    <a href="profile.xhtml" style="font-size: 18px" class="w3-center w3-padding-16 w3-hover-deep-orange w3-bar-item w3-hover-opacity w3-button w3-right">
-                        Profile</a>
-                    <a href="intro.xhtml" style="font-size: 18px" class="w3-center w3-padding-16 w3-hover-deep-orange w3-bar-item w3-hover-opacity w3-button w3-right">
-                        Logout</a>
-                </c:when>
-                <c:otherwise>
-                    <a href="intro.xhtml" style="font-size: 18px" class="w3-center w3-padding-16 w3-hover-deep-orange w3-bar-item w3-hover-opacity w3-button w3-right">
-                       Sign In</a>
-                    <a href="regist.xhtml" style="font-size: 18px" class="w3-center w3-padding-16 w3-hover-deep-orange w3-bar-item w3-hover-opacity w3-button w3-right">
-                       Register Now</a>
-                </c:otherwise>
+               <c:when test="#{User.username != ''}" >
+                  <a href="profile.xhtml" style="font-size: 18px" class="w3-center w3-padding-16 w3-hover-deep-orange w3-bar-item w3-hover-opacity w3-button w3-right">
+                  Profile</a>
+                  <a href="intro.xhtml" style="font-size: 18px" class="w3-center w3-padding-16 w3-hover-deep-orange w3-bar-item w3-hover-opacity w3-button w3-right">
+                  Logout</a>
+               </c:when>
+               <c:otherwise>
+                  <a href="intro.xhtml" style="font-size: 18px" class="w3-center w3-padding-16 w3-hover-deep-orange w3-bar-item w3-hover-opacity w3-button w3-right">
+                  Sign In</a>
+                  <a href="regist.xhtml" style="font-size: 18px" class="w3-center w3-padding-16 w3-hover-deep-orange w3-bar-item w3-hover-opacity w3-button w3-right">
+                  Register Now</a>
+               </c:otherwise>
             </c:choose>
+         </div>
+      </div>
+      <div id="rest" class="w3-container" style="margin-left: 20%">
+         <div id="news" class="w3-justify w3-container w3-padding-64" style="margin-left: 5%; margin-right: 10%;">
+            <h2 style="color: #273c4e"><b>News</b></h2>
+            <hr style="border-color: #273c4e; border: 1.5px solid #273c4e"/>
+            <!-- Frontend New -->
+            <div id="new-1" class="w3-justify">
+               <li>Development of intro and register page.</li>
+               <label style="font-size: 10px;font-style: italic">18 May 2020</label>
             </div>
-        </div>
-        
-        <div id="rest" class="w3-container" style="margin-left: 20%">
-            
-            
-            <div id="news" class="w3-justify w3-container w3-padding-64" style="margin-left: 5%; margin-right: 10%;">
-                <h2 style="color: #273c4e"><b>News</b></h2>
-                <hr style="border-color: #273c4e; border: 1.5px solid #273c4e"/>
-                <!-- Frontend New -->
-                <div id="new-1" class="w3-justify">
-                    <li>Development of intro and register page.</li>
-                    <label style="font-size: 10px;font-style: italic">18 May 2020</label>
-                </div>
-                <!-- Back-end New-->
-                <div id="new-1" class="w3-justify">
-                    <li>Backend development for regist/login.</li>
-                    <label style="font-size: 10px;font-style: italic">20 May 2020</label>
-                </div>
+            <!-- Back-end New-->
+            <div id="new-1" class="w3-justify">
+               <li>Backend development for regist/login.</li>
+               <label style="font-size: 10px;font-style: italic">20 May 2020</label>
             </div>
-            
-            <div id="my-houses" class="w3-justify w3-container w3-padding-64" style="margin-right: 10%; margin-left: 5%;margin-top: 50px;">
-                <h2 style="color: #273c4e" class="w3-justify"><b>Houses</b></h2>
-                <hr style=" border-color: #273c4e; border: 1.5px solid #273c4e"/>
-                <ul style="height: auto;" class="w3-margin-top w3-ul" >
-                    <h:form>
-                        <ui:repeat value="#{Home_Service.list_houses}" var="list">
-                            <li id="list_#{list.address}#{list.zip_Code}" class="w3-col w3-margin-bottom w3-card-4 w3-padding-16 w3-border-white w3-justify" 
-                                style="width: 30%;margin-right: 15px;margin-left: 25px;border-top-right-radius: 25px;
-                                border-top-left-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;">
-                                <div class="imagewrap">
-                                    <img id="img_#{list.address}#{list.zip_Code}" src="images/casa-de-neve.jpg" class="round-photo w3-bar-item" style="" />
-                                    <div class="w3-row">
-                                        <div class="w3-col " style="width:90%">
-                                            <h:commandButton action="#{Home_Service.requestHouse(User.username, list.address, list.zip_Code)}" style="margin:auto; width: 100%; " 
-                                            class="w3-button w3-text-white w3-hover-deep-orange w3-hover-opacity w3-deep-orange" value="Request" />
-                                        </div>
-                                        <div style="height: 38px" class="w3-light-gray w3-hover-gray w3-center w3-rest">
-                                            <a onclick="something(id)" id="id_#{list.address}#{list.zip_Code}_down" href="#img_#{list.address}#{list.zip_Code}"><img style="margin-top:8px" src="images/down-arrow.png" /></a>
-                                            <a onclick="something(id)" id="id_#{list.address}#{list.zip_Code}_up" style="display:none" href="#img_#{list.address}#{list.zip_Code}"><img style="margin-top:8px" src="images/up-arrow.png" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="id_#{list.address}#{list.zip_Code}_data" style="display:none; margin-top: 50px" class="w3-animate-top w3-animate-opacity w3-bar-item">
-                                    <span class="w3-large">#{list.address}</span>
-                                    <br/>
-                                    <span>#{list.zip_Code}</span>
-                                    <br/>
-                                    <span>#{list.price}</span>
-                                    <br/>
-                                    <span>#{list.owner}</span>
-                                    <br/>
-                                    <span>#{list.rate}</span>
-                                    <br/>
-                                    <p>#{list.properties}</p>
-                                </div>
-                            </li>
-                        </ui:repeat>
-                    </h:form>
-                </ul>
+         </div>
+         <div id="my-houses" class="w3-justify w3-container w3-padding-64" style="margin-right: 10%; margin-left: 5%;margin-top: 50px;">
+            <h2 style="color: #273c4e" class="w3-justify"><b>Houses</b></h2>
+            <hr style=" border-color: #273c4e; border: 1.5px solid #273c4e"/>
+            <ul style="height: auto;" class="w3-margin-top w3-ul" >
+               <h:form>
+                  <ui:repeat value="#{Home_Service.list_houses}" var="list">
+                     <li id="list_#{list.address}#{list.zip_Code}" class="w3-col w3-margin-bottom w3-card-4 w3-padding-16 w3-border-white w3-justify" 
+                        style="width: 30%;margin-right: 15px;margin-left: 25px;border-top-right-radius: 25px;
+                        border-top-left-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;">
+                        <div class="imagewrap">
+                           <img id="img_#{list.address}#{list.zip_Code}" src="images/casa-de-neve.jpg" class="round-photo w3-bar-item" style="" />
+                           <div class="w3-row">
+                              <div class="w3-col " style="width:90%">
+                                 <h:commandButton action="#{Home_Service.requestHouse(User.username, list.address, list.zip_Code)}" style="margin:auto; width: 100%; " 
+                                    class="w3-button w3-text-white w3-hover-deep-orange w3-hover-opacity w3-deep-orange" value="Request" />
+                              </div>
+                              <div style="height: 38px" class="w3-light-gray w3-hover-gray w3-center w3-rest">
+                                 <a onclick="something(id)" id="id_#{list.address}#{list.zip_Code}_down" href="#img_#{list.address}#{list.zip_Code}"><img style="margin-top:8px" src="images/down-arrow.png" /></a>
+                                 <a onclick="something(id)" id="id_#{list.address}#{list.zip_Code}_up" style="display:none" href="#img_#{list.address}#{list.zip_Code}"><img style="margin-top:8px" src="images/up-arrow.png" /></a>
+                              </div>
+                           </div>
+                        </div>
+                        <div id="id_#{list.address}#{list.zip_Code}_data" style="display:none; margin-top: 50px" class="w3-animate-top w3-animate-opacity w3-bar-item">
+                           <span class="w3-large">#{list.address}</span>
+                           <br/>
+                           <span>#{list.zip_Code}</span>
+                           <br/>
+                           <span>#{list.price}</span>
+                           <br/>
+                           <span>#{list.owner}</span>
+                           <br/>
+                           <span>#{list.rate}</span>
+                           <br/>
+                           <p>#{list.properties}</p>
+                        </div>
+                     </li>
+                  </ui:repeat>
+               </h:form>
+            </ul>
+         </div>
+         <div id="about" class="w3-justify w3-container w3-padding-64" style="margin-top: 50px; margin-left: 5%; margin-right: 10%;">
+            <h2 style="color: #273c4e"><b>About</b></h2>
+            <hr style="border-color: #273c4e; border: 1.5px solid #273c4e"/>
+            <p> This project approaches the two sides of the investment on real estate.
+               On one side we have the investor that wants to place his properties to rent; in the other hand, we have the client 
+               that is looking for a property to rent and consequently inhabit.
+            </p>
+            <p> In an attempt to support both sides, we focus on develop a simple and intuitive website. We provide the following functionalities:
+            <li>Insert a property;</li>
+            <li>Request a property;</li>
+            <li>Book a property;</li>
+            <li>Remove a property;</li>
+            <li>Consult a property.</li>
+            </p>
+            <p>
+               Due to this, the work plan is divided into five research and development activities, and the report writing.
+            </p>
+            <!-- Activity -->
+            <i class="fa fa-code" aria-hidden="true"></i> 1.  Contextualization with the proposed goals and work environment setup
+            <br/>
+            <label style="font-size: 10px">Starting at week 0 and ending at week 1.</label>
+            <div id="id-bar-section1" class="w3-center">
+               <div class="w3-border w3-border-gray">
+                  <div id="bar1" class="w3-deep-orange" style="color:white;width:100%">100%</div>
+               </div>
             </div>
-            
-            <div id="about" class="w3-justify w3-container w3-padding-64" style="margin-top: 50px; margin-left: 5%; margin-right: 10%;">
-                <h2 style="color: #273c4e"><b>About</b></h2>
-                <hr style="border-color: #273c4e; border: 1.5px solid #273c4e"/>	
-                <p> This project approaches the two sides of the investment on real estate.
-                    On one side we have the investor that wants to place his properties to rent; in the other hand, we have the client 
-                    that is looking for a property to rent and consequently inhabit.
-                </p>
-                <p> In an attempt to support both sides, we focus on develop a simple and intuitive website. We provide the following functionalities:
-                    <li>Insert a property;</li>
-                    <li>Request a property;</li>
-                    <li>Book a property;</li>
-                    <li>Remove a property;</li>
-                    <li>Consult a property.</li>
-                </p>
-                <p>
-                    Due to this, the work plan is divided into five research and development activities, and the report writing.
-                </p>
-
-                <!-- Activity -->
-                <i class="fa fa-code" aria-hidden="true"></i> 1.  Contextualization with the proposed goals and work environment setup
-                <br/>
-                <label style="font-size: 10px">Starting at week 0 and ending at week 1.</label>
-                <div id="id-bar-section1" class="w3-center">
-                    <div class="w3-border w3-border-gray">
-                        <div id="bar1" class="w3-deep-orange" style="color:white;width:100%">100%</div>
-                    </div>
-                </div>	
-                <br/>
-                <i class="fa fa-code" aria-hidden="true"></i> 2. Definition of all the frameworks to be used in this project
-                <br/>
-                <label style="font-size: 10px">Starting at week 0 and ending at week 1.</label>
-                <div id="id-bar-section2" class="w3-center">
-                    <div class="w3-border w3-border-gray">
-                        <div id="bar2" class="w3-deep-orange" style="color:white;width:100%">100%</div>
-                    </div>
-                </div>	
-                <br/>
-                <i class="fa fa-code" aria-hidden="true"></i> 3. Backend implementation
-                <br/>
-                <label style="font-size: 10px">Starting at week 1 and ending at week 3.</label>
-                <div id="id-bar-section3" class="w3-center">
-                    <div class="w3-border w3-border-gray">
-                        <div id="bar3" class="w3-deep-orange" style="color:white;width:65%">65%</div>
-                    </div>
-                </div>	
-                <br/>
-                <i class="fa fa-code" aria-hidden="true"></i> 4. Frontend implementation
-                <br/>
-                <label style="font-size: 10px">Starting at week 2 and ending at week 3.</label>
-                <div id="id-bar-section4" class="w3-center">
-                    <div class="w3-border w3-border-gray">
-                        <div id="bar4" class="w3-deep-orange" style="color:white;width:60%">60%</div>
-                    </div>
-                </div>	
-                <br/>
-                <i class="fa fa-code" aria-hidden="true"></i> 5. Analysis and system tests
-                <br/>
-                <label style="font-size: 10px">Starting at week 3 and ending at week 4.</label>
-                <div id="id-bar-section5" class="w3-center">
-                    <div class="w3-border w3-border-black">
-                        <div id="bar5" style="color:white;background-color:#273c4e;width:0%">0</div>
-                    </div>
-                </div>	
-                <br/>
-                <i class="fa fa-code" aria-hidden="true"></i> 6. Report
-                <br/>
-                <label style="font-size: 10px">Starting at week 0 and ending at week 4.</label>
-                <div id="id-bar-section6" class="w3-center">
-                    <div class="w3-border w3-border-black">
-                        <div id="bar6" style="color:white;background-color:#273c4e;width:0%">0</div>
-                    </div>
-                </div>	
+            <br/>
+            <i class="fa fa-code" aria-hidden="true"></i> 2. Definition of all the frameworks to be used in this project
+            <br/>
+            <label style="font-size: 10px">Starting at week 0 and ending at week 1.</label>
+            <div id="id-bar-section2" class="w3-center">
+               <div class="w3-border w3-border-gray">
+                  <div id="bar2" class="w3-deep-orange" style="color:white;width:100%">100%</div>
+               </div>
             </div>
-            
-        <!-- Team -->
-        <div id="team" class="w3-container w3-justify w3-padding-64" style="margin-left: 5%; margin-right: 10%; margin-top: 50px">
+            <br/>
+            <i class="fa fa-code" aria-hidden="true"></i> 3. Backend implementation
+            <br/>
+            <label style="font-size: 10px">Starting at week 1 and ending at week 3.</label>
+            <div id="id-bar-section3" class="w3-center">
+               <div class="w3-border w3-border-gray">
+                  <div id="bar3" class="w3-deep-orange" style="color:white;width:65%">65%</div>
+               </div>
+            </div>
+            <br/>
+            <i class="fa fa-code" aria-hidden="true"></i> 4. Frontend implementation
+            <br/>
+            <label style="font-size: 10px">Starting at week 2 and ending at week 3.</label>
+            <div id="id-bar-section4" class="w3-center">
+               <div class="w3-border w3-border-gray">
+                  <div id="bar4" class="w3-deep-orange" style="color:white;width:60%">60%</div>
+               </div>
+            </div>
+            <br/>
+            <i class="fa fa-code" aria-hidden="true"></i> 5. Analysis and system tests
+            <br/>
+            <label style="font-size: 10px">Starting at week 3 and ending at week 4.</label>
+            <div id="id-bar-section5" class="w3-center">
+               <div class="w3-border w3-border-black">
+                  <div id="bar5" style="color:white;background-color:#273c4e;width:0%">0</div>
+               </div>
+            </div>
+            <br/>
+            <i class="fa fa-code" aria-hidden="true"></i> 6. Report
+            <br/>
+            <label style="font-size: 10px">Starting at week 0 and ending at week 4.</label>
+            <div id="id-bar-section6" class="w3-center">
+               <div class="w3-border w3-border-black">
+                  <div id="bar6" style="color:white;background-color:#273c4e;width:0%">0</div>
+               </div>
+            </div>
+         </div>
+         <!-- Team -->
+         <div id="team" class="w3-container w3-justify w3-padding-64" style="margin-left: 5%; margin-right: 10%; margin-top: 50px">
             <h2 style="color: #273c4e"><b>Team</b></h2>
             <hr style="border-color: #273c4e; border: 1.5px solid #273c4e" />
             <div id="members" class="w3-center w3-bar">
-                <div id="to-sardinha" class="w3-quarter">
-                    <img style="margin-bottom: 5px" class="round-photo" src="images/vermelho.png" />
-                    <br/>
-                    António Sardinha
-                    <br/>
-                    <a href="mailto:antonio.sardinha@ubi.pt">e-mail</a>
-                </div>
-                <div id="to-sardinha" class="w3-quarter">
-                    <img style="margin-bottom: 5px" class="round-photo" src="images/azul.png" />
-                    <br/>
-                    Pedro Brito
-                    <br/>
-                    <a href="mailto:jorge.brito@ubi.pt">e-mail</a>
-                </div>
-                <div id="to-sardinha" class="w3-quarter">
-                    <img style="margin-bottom: 5px" class="round-photo" src="images/amarelo.png" />
-                    <br/>
-                    Ricardo Ribeiro
-                    <br/>
-                    <a href="mailto:ricardo.andre.pereira.ribeiro@ubi.pt">e-mail</a>
-                </div>
-                <div id="to-sardinha" class="w3-quarter">
-                    <img style="margin-bottom: 5px" class="round-photo" src="images/verde.png" />
-                    <br/>
-                    Rui Raposo
-                    <br/>
-                    <a href="mailto:rui.raposo@ubi.pt">e-mail</a>
-                </div>
+               <div id="to-sardinha" class="w3-quarter">
+                  <img style="margin-bottom: 5px" class="round-photo" src="images/vermelho.png" />
+                  <br/>
+                  António Sardinha
+                  <br/>
+                  <a href="mailto:antonio.sardinha@ubi.pt">e-mail</a>
+               </div>
+               <div id="to-sardinha" class="w3-quarter">
+                  <img style="margin-bottom: 5px" class="round-photo" src="images/azul.png" />
+                  <br/>
+                  Pedro Brito
+                  <br/>
+                  <a href="mailto:jorge.brito@ubi.pt">e-mail</a>
+               </div>
+               <div id="to-sardinha" class="w3-quarter">
+                  <img style="margin-bottom: 5px" class="round-photo" src="images/amarelo.png" />
+                  <br/>
+                  Ricardo Ribeiro
+                  <br/>
+                  <a href="mailto:ricardo.andre.pereira.ribeiro@ubi.pt">e-mail</a>
+               </div>
+               <div id="to-sardinha" class="w3-quarter">
+                  <img style="margin-bottom: 5px" class="round-photo" src="images/verde.png" />
+                  <br/>
+                  Rui Raposo
+                  <br/>
+                  <a href="mailto:rui.raposo@ubi.pt">e-mail</a>
+               </div>
             </div>
-        </div>
-            
-        <!-- FAQ -->
-        <div id="faq" class="w3-container w3-justify w3-padding-64" style="margin-left: 5%; margin-right: 10%; margin-top: 50px;">
+         </div>
+         <!-- FAQ -->
+         <div id="faq" class="w3-container w3-justify w3-padding-64" style="margin-left: 5%; margin-right: 10%; margin-top: 50px;">
             <h2 style="color: #273c4e"><b>FAQ</b></h2>
             <hr style="border-color: #273c4e; border: 1.5px solid #273c4e" />
             <li style="font-weight: bold">How can I turn my house available for rent?</li>
             <p> In order to do this, you have to be registered and logged in. Then, go to your <b>profile</b> and check the
-                <a href="account.html"><b>New House</b></a> section and follow the current steps.
+               <a href="account.html"><b>New House</b></a> section and follow the current steps.
             </p>
             <li style="font-weight: bold">Who provides the house's rate?</li>
             <p> The clients who already rented a specific house, after delivering it, they can rate the house out of 10.
@@ -257,57 +243,44 @@
             <li style="font-weight: bold">How can I get in touch with the website's owner?</li>
             <p> Check the <b>Team</b> section and look for our e-mails.
             </p>
-        </div>
-            
-        </div>
-
-    </h:body>
-    
-    <script type="text/javascript">
-        
-
-        
-        
-        function something(id){
-            
-            var last2 = id.slice(-2);
-            var specific_item = "";
-            
-            if(last2 == "up"){
-                specific_item = id.substr(3, id.length - 6);
-                // hide
-                document.getElementById("id_"+specific_item+"_up").style.display = "none";
-                document.getElementById("id_"+specific_item+"_data").style.display = "none";
-                // show
-                document.getElementById("id_"+specific_item+"_down").style.display = "block";
-                // height
-                document.getElementById("list_"+specific_item).style.height = "auto";
-                document.getElementById("list_"+specific_item).style.background = "white";
-            }
-            else{
-                specific_item = id.substr(3, id.length - 8);
-                // hide
-                document.getElementById("id_"+specific_item+"_down").style.display = "none";
-                document.getElementById("id_"+specific_item+"_data").style.display = "block";
-                // show
-                document.getElementById("id_"+specific_item+"_up").style.display = "block";
-                // height
-                document.getElementById("list_"+specific_item).style.height = "668px";
-                document.getElementById("list_"+specific_item).style.background = "rgb(255,255,255)";
-                document.getElementById("list_"+specific_item).style.background = "linear-gradient(180deg, rgba(255,255,255,1) 52%, rgba(255,182,110,1) 80%, rgba(78,182,255,1) 96%)";
-            }
-        }
-        
-        
-        
-        
-        
-        
+         </div>
+      </div>
+   </h:body>
+   <script type="text/javascript">
+      function something(id){
+          
+          var last2 = id.slice(-2);
+          var specific_item = "";
+          
+          if(last2 == "up"){
+              specific_item = id.substr(3, id.length - 6);
+              // hide
+              document.getElementById("id_"+specific_item+"_up").style.display = "none";
+              document.getElementById("id_"+specific_item+"_data").style.display = "none";
+              // show
+              document.getElementById("id_"+specific_item+"_down").style.display = "block";
+              // height
+              document.getElementById("list_"+specific_item).style.height = "auto";
+              document.getElementById("list_"+specific_item).style.background = "white";
+          }
+          else{
+              specific_item = id.substr(3, id.length - 8);
+              // hide
+              document.getElementById("id_"+specific_item+"_down").style.display = "none";
+              document.getElementById("id_"+specific_item+"_data").style.display = "block";
+              // show
+              document.getElementById("id_"+specific_item+"_up").style.display = "block";
+              // height
+              document.getElementById("list_"+specific_item).style.height = "668px";
+              document.getElementById("list_"+specific_item).style.background = "rgb(255,255,255)";
+              document.getElementById("list_"+specific_item).style.background = "linear-gradient(180deg, rgba(255,255,255,1) 52%, rgba(255,182,110,1) 80%, rgba(78,182,255,1) 96%)";
+          }
+      }
+      
+      
+      
+      
+      
+      
    </script>
-    
-    
 </html>
-
-
-
-

@@ -63,7 +63,58 @@
             vertical-align: middle;
             white-space: nowrap;
         }
-        
+
+
+        .popup {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .popup .popuptext {
+            visibility: hidden;
+            width: 160px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -80px;
+        }
+
+        .popup .popuptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+
+        .popup .show {
+            visibility: visible;
+            -webkit-animation: fadeIn 1s;
+            animation: fadeIn 1s
+        }
+
+        /* Add animation (fade in the popup) */
+        @-webkit-keyframes fadeIn {
+            from {opacity: 0;} 
+            to {opacity: 1;}
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity:1 ;}
+        }
+
     </style>
 
     <h:body>
@@ -76,36 +127,36 @@
 
         <!-- Sidebar -->
         <div class="w3-sidebar w3-blue w3-bar-block" style="width:15%">
-          <div class="w3-padding-64 w3-center w3-container">
-            <img src="images/bird-3.png"/>
-          </div>
-          <div class="w3-center">
-            <a href="#news" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
-                News</a>
-            <a href="#my-houses" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
-                Houses</a>
-            <a href="#about" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
-                About</a>
-            <a href="#team" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
-                Team</a>
-            <a href="#faq" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
-                FAQ</a>
-            <a href="profile.xhtml" style="font-size: 18px" class="w3-center w3-padding-16 w3-hover-deep-orange w3-bar-item w3-hover-opacity w3-button w3-right">
-                Profile</a>
-            <a href="intro.xhtml" style="font-size: 18px" class="w3-center w3-padding-16 w3-hover-deep-orange w3-bar-item w3-hover-opacity w3-button w3-right">
-                Logout</a>
+            <div class="w3-padding-64 w3-center w3-container">
+                <img src="images/bird-3.png"/>
+            </div>
+            <div class="w3-center">
+                <a href="#news" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
+                    News</a>
+                <a href="#my-houses" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
+                    Houses</a>
+                <a href="#about" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
+                    About</a>
+                <a href="#team" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
+                    Team</a>
+                <a href="#faq" style="font-size: 18px" class="w3-center w3-padding-16 w3-bar-item w3-hover-deep-orange w3-hover-opacity w3-button">
+                    FAQ</a>
+                <a href="profile.xhtml" style="font-size: 18px" class="w3-center w3-padding-16 w3-hover-deep-orange w3-bar-item w3-hover-opacity w3-button w3-right">
+                    Profile</a>
+                <a href="intro.xhtml" style="font-size: 18px" class="w3-center w3-padding-16 w3-hover-deep-orange w3-bar-item w3-hover-opacity w3-button w3-right">
+                    Logout</a>
             </div>
         </div>
-        
+
         <div id="rest" class="w3-container" style="margin-left: 20%">
-            
+
             <div id="title" class="w3-justify w3-container w3-padding-64" style="margin-left: 5%; margin-right: 10%;">
                 <h:form>
                     <h2 style="color: #273c4e">Settings</h2>
                     <hr style="border-color: #273c4e; border: 1.5px solid #273c4e" />
                     <i class="fa fa-user-o" style="margin-right: 6px;font-size:28px"></i>
                     <h:inputText readonly="#{facesContext.renderResponse}" style="width: 30%;display: inline"
-                        class="w3-input w3-border-black w3-border w3-border-black" value="#{User.username}" /> 
+                                 class="w3-input w3-border-black w3-border w3-border-black" value="#{User.username}" /> 
                     <br/>
                     <i class="fa fa-lock" style="margin-top: 25px;margin-right: 12px;font-size:28px"></i>
                     <h:inputSecret pt:placeholder="new password" binding="#{password_1}" class="w3-input w3-border w3-border-black" style="width: 30%;display: inline" />
@@ -116,12 +167,12 @@
                     <i class="fa fa-lock" style="margin-top: 25px;margin-right: 12px;font-size:28px"></i>
                     <h:inputSecret pt:placeholder="current password" binding="#{password_curr}" class="w3-input w3-border w3-border-black" style="width: 30%;display: inline"/>
                     <h:commandButton action="#{Profile_Service.changePassword(User.username, password_1.value, password_2.value, password_curr.value)}"
-                    style="width: 30%; margin-top: 10px; margin-left: 30px" 
-                    class="w3-button w3-text-white w3-deep-orange w3-hover-deep-orange w3-hover-opacity w3-block w3-padding-large" value="Submit"/>
+                                     style="width: 30%; margin-top: 10px; margin-left: 30px" 
+                                     class="w3-button w3-text-white w3-deep-orange w3-hover-deep-orange w3-hover-opacity w3-block w3-padding-large" value="Submit"/>
                 </h:form>
             </div>
-            
-            
+
+
             <!-- List Houses -->
             <div id="my-houses" class="w3-justify w3-container w3-padding-64" style="margin-right: 10%; margin-left: 5%;margin-top: 50px;">
                 <h2 style="color: #273c4e" class="w3-justify">My Houses</h2>
@@ -135,9 +186,20 @@
                                 <div class="imagewrap">
                                     <img id="img_#{houses.house.address}#{houses.house.zip_Code}" src="images/casa-de-neve.jpg" class="round-photo w3-bar-item" />
                                     <div class="w3-row">
-                                        <div class="w3-col " style="width:90%">
-                                            <h:commandButton action="#{Profile_Service.deliverHouse(User.username, houses.house.address, houses.house.zip_Code, houses.color)}" style="background-color:#{houses.color}; margin:auto; width: 100%;" 
-                                    class="w3-button w3-margin-bottom w3-text-white w3-block" value="#{houses.status}" />
+                                        <div class="w3-col" style="width:90% ">
+                                            <h:commandButton onclick="document.getElementById('form_#{houses.house.address}#{houses.house.zip_Code}').style.display='block'"  action="#{Profile_Service.deliverHouse(User.username, houses.house.address, houses.house.zip_Code, houses.color)}" style="background-color:#{houses.color}; margin:auto; width: 100%;" 
+                                                             class="w3-button w3-margin-bottom w3-text-white w3-block popup" value="#{houses.status}" > 
+                                                <f:ajax execute="@form" render="@none" />
+                                            </h:commandButton>
+                                            <div id="form_#{houses.house.address}#{houses.house.zip_Code}" class="w3-modal">
+                                                <div class="w3-modal-content">
+                                                    <div class="w3-container">
+                                                        <span onclick="document.getElementById('form_#{houses.house.address}#{houses.house.zip_Code}').style.display = 'none'" class="w3-button w3-display-topright">X</span>
+                                                         Rating : <input type="text" name="rating" size="30" />
+                                                         <input type="submit" name="submitbtn" value="Submit" />
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div style="height: 38px" class="w3-light-gray w3-hover-gray w3-center w3-rest">
                                             <a onclick="something(id)" id="id_#{houses.house.address}#{houses.house.zip_Code}_down" href="#img_#{houses.house.address}#{houses.house.zip_Code}"><img style="margin-top:8px" src="images/down-arrow.png" /></a>
@@ -163,8 +225,8 @@
                     </h:form>
                 </ul>
             </div>
-            
-            
+
+
             <!-- Adding House -->
             <div id="my-houses" class="w3-justify w3-container w3-padding-64" style="margin-right: 10%; margin-left: 5%;margin-top: 50px;">
                 <h2 style="color: #273c4e" class="w3-justify">Adding Houses</h2>
@@ -189,45 +251,45 @@
                         </div>
                     </div>
                     <h:commandButton action="#{Profile_Service.insertNewHouse(User.username, address.value, zip_code.value, zip_code2.value, lease.value, features.value)}" style="background-color: #273c4e;width: 50%;margin-top: 20px" 
-                    class="w3-button w3-margin-bottom w3-text-white w3-block w3-padding-large w3-deep-orange w3-hover-deep-orange w3-hover-opacity" value="Submit"/>
+                                     class="w3-button w3-margin-bottom w3-text-white w3-block w3-padding-large w3-deep-orange w3-hover-deep-orange w3-hover-opacity" value="Submit"/>
                 </h:form>
             </div>
         </div>
 
     </h:body>
-    
+
     <script type="text/javascript">
-        
-        function something(id){
-            
+
+        function something(id) {
+
             var last2 = id.slice(-2);
             var specific_item = "";
-            
-            if(last2 == "up"){
+
+            if (last2 == "up") {
                 specific_item = id.substr(3, id.length - 6);
                 // hide
-                document.getElementById("id_"+specific_item+"_up").style.display = "none";
-                document.getElementById("id_"+specific_item+"_data").style.display = "none";
+                document.getElementById("id_" + specific_item + "_up").style.display = "none";
+                document.getElementById("id_" + specific_item + "_data").style.display = "none";
                 // show
-                document.getElementById("id_"+specific_item+"_down").style.display = "block";
+                document.getElementById("id_" + specific_item + "_down").style.display = "block";
                 // height
-                document.getElementById("list_"+specific_item).style.height = "auto";
-                document.getElementById("list_"+specific_item).style.background = "white";
-            }
-            else{
+                document.getElementById("list_" + specific_item).style.height = "auto";
+                document.getElementById("list_" + specific_item).style.background = "white";
+            } else {
                 specific_item = id.substr(3, id.length - 8);
                 // hide
-                document.getElementById("id_"+specific_item+"_down").style.display = "none";
-                document.getElementById("id_"+specific_item+"_data").style.display = "block";
+                document.getElementById("id_" + specific_item + "_down").style.display = "none";
+                document.getElementById("id_" + specific_item + "_data").style.display = "block";
                 // show
-                document.getElementById("id_"+specific_item+"_up").style.display = "block";
+                document.getElementById("id_" + specific_item + "_up").style.display = "block";
                 // height
-                document.getElementById("list_"+specific_item).style.height = "668px";
-                document.getElementById("list_"+specific_item).style.background = "rgb(255,255,255)";
-                document.getElementById("list_"+specific_item).style.background = "linear-gradient(180deg, rgba(255,255,255,1) 52%, rgba(255,182,110,1) 80%, rgba(78,182,255,1) 96%)";
+                document.getElementById("list_" + specific_item).style.height = "668px";
+                document.getElementById("list_" + specific_item).style.background = "rgb(255,255,255)";
+                document.getElementById("list_" + specific_item).style.background = "linear-gradient(180deg, rgba(255,255,255,1) 52%, rgba(255,182,110,1) 80%, rgba(78,182,255,1) 96%)";
             }
-        } 
-        
-   </script>
-    
+        }
+
+
+    </script>
+
 </html>

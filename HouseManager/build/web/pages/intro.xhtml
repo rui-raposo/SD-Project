@@ -97,5 +97,46 @@
             <img class="round-photo-icon" src="images/netb-removebg-preview.png"/>
         </footer>
     </h:body>
+<<<<<<< Updated upstream
+=======
+
+    <script>
+        var elem = document.getElementById("image_id");
+        var elem2 = document.getElementById("login-form");
+        var pos = 0;
+        var opacity = 0.03;
+        var reach_y = 200;
+        var pos_y = 0;
+        var id = setInterval(frame, 1);
+        function frame() {
+
+            if (reach_y == 200)
+                reach_y = 0;
+            else if (reach_y == 0)
+                reach_y = 200;
+
+            if (pos == 560) {
+                clearInterval(id);
+                //document.getElementById("img_1").style.display = "none";
+                //document.getElementById("img_2").style.display = "block";
+            } else {
+                pos += 2;
+                if (reach_y > 0) {
+                    pos_y += 20;
+                } else {
+                    pos_y -= 20;
+                }
+
+                opacity += 0.003;
+
+                elem2.style.opacity = opacity;
+
+                elem.style.top = pos_y + 'px'
+                elem.style.left = pos + 'px';
+            }
+        }
+    </script>
+
+>>>>>>> Stashed changes
 </html>
 

@@ -1,0 +1,318 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <link rel="icon" type="image/png" href="images/bird.png" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+        <title>Home</title>
+    </h:head>
+
+    <style type="text/css">
+
+        body, html {
+            height: 100%;
+            color: #777;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .round-photo {
+            width:95%;
+            height: 250px;
+            object-fit:cover;
+        }
+
+        .round-image {
+            width:195px;
+            height:195px;
+            object-fit:cover;
+            border-radius:50%;
+            border: 1px solid;
+        }
+
+        h1{
+            font-family: 'DistantStroke' !important;
+            color: white;
+            font-weight: bold;
+            font-size: 150px;
+        }
+
+        .bgimg-1{
+            /* https://unsplash.com/photos/Q1p7bh3SHj8 */
+            background-image: url('img/bgblack.jpg');
+            opacity: 0.7;
+            height: 100%;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        h2{
+            color: black;
+        }
+
+        i, .fa{
+            margin-right: 10px;
+            color: black;
+        }
+
+        @font-face {
+            font-family: 'DistantStroke';
+            src: url('packages/DistantStroke.eot?#iefix') format('embedded-opentype'),  url('packages/DistantStroke.otf')  format('opentype'),
+                 url('packages/DistantStroke.woff') format('woff'), url('packages/DistantStroke.ttf')  format('truetype'), url('packages/DistantStroke.svg#DistantStroke') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        .imagewrap {display:inline-block;position:relative;}
+        .button1 {position:absolute;bottom:0;left:0;}
+
+    
+    </style>
+    
+    <script type="text/javascript">
+        function test(data,data2){
+            //alert(data + "   " + data2);
+        }
+    </script>
+
+    <h:body onload="test('#{User.username}','#{User.password}')">
+        
+        <!-- Valid Data --> 
+        <f:metadata>
+            <!--<f:viewAction action = "#{User.validUserData('home.xhtml')}"></f:viewAction>-->
+            <f:viewAction action = "#{Home_Service.updateHousesArray(User.username)}"></f:viewAction>
+        </f:metadata>
+        
+        <!-- Image background -->
+        <div id="main-title-bg" class="bgimg-1 w3-display-container">
+            <div id="main-title" class="w3-display-middle w3-center" style="white-space:nowrap;">
+                <h1 id="titulo" class="w3-margin-bottom">Welcome</h1>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <div id="navbar-id" class="w3-top">
+            <div class="w3-bar w3-text-white w3-blue w3-card-4" id="myNavbar">
+                <a class="w3-bar-item w3-button w3-hover-blue w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+                    <i style="color:white" class="fa fa-bars"></i></a>
+                <a href="#home" class="w3-bar-item w3-button w3-hover-blue w3-hover-opacity ">HOME</a>
+                <a href="#news" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-blue w3-hover-opacity ">NEWS</a>
+                <a href="#about" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-blue w3-hover-opacity ">HOUSES</a>
+                <a href="#activities" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-blue w3-hover-opacity ">ABOUT</a>
+                <a href="#team" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-blue w3-hover-opacity ">TEAM</a>
+                <a href="#outputs" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-blue w3-hover-opacity ">FAQ</a>
+                <c:choose>
+                    <c:when test="#{User.username != ''}" >
+                        <a href="intro.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-blue w3-hover-opacity ">LOGOUT</a>
+                        <a href="profile.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-blue w3-hover-opacity ">PROFILE</a>
+                        
+                    </c:when>
+                    <c:otherwise>
+                        <a href="regist.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-blue w3-hover-opacity ">REGISTER NOW</a>
+                        <a href="intro.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-blue w3-hover-opacity ">SIGN IN</a>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+
+            <!-- Navbar on small screens -->
+            <div id="navDemo" class="w3-bar-block w3-blue w3-text-white w3-hide w3-hide-large">
+                <a href="#news" class="w3-bar-item w3-button" onclick="toggleFunction()">NEWS</a>
+                <a href="#about" class="w3-bar-item w3-button" onclick="toggleFunction()">ABOUT</a>
+                <a href="#activities" class="w3-bar-item w3-button" onclick="toggleFunction()">ACTIVITIES</a>
+                <a href="#team" class="w3-bar-item w3-button" onclick="toggleFunction()">TEAM</a>
+                <a href="#outputs" class="w3-bar-item w3-button" onclick="toggleFunction()">OUTPUTS</a>
+                <c:choose>
+                    <c:when test="#{User.username != ''}" >
+                        <a href="intro.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium">LOGOUT</a>
+                        <a href="profile.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium">PROFILE</a>
+                        
+                    </c:when>
+                    <c:otherwise>
+                        <a href="regist.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium">REGISTER NOW</a>
+                        <a href="intro.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium">SIGN IN</a>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+        </div>
+            
+        <div id="rest" style="display: none;" >
+            <div id="my-houses" class="w3-justify w3-container w3-padding-64 w3-content">
+                <h2>Houses</h2>
+                <hr />
+                <div id="form-all" class="w3-row w3-container">
+                    <h:form>
+                        <ui:repeat value="#{Home_Service.list_houses}" var="list">
+                            <div id="list_#{list.address}#{list.zip_Code}" class="w3-half w3-card-2 w3-padding-16 w3-border-white w3-justify" style="height: 600px;">
+                                <div class="w3-center">
+                                    <img id="img_#{list.address}#{list.zip_Code}" src="images/casa-de-neve.jpg" class="round-photo w3-bar-item w3-center" />
+                                    <h:commandButton action="#{Home_Service.requestHouse(User.username, list.address, list.zip_Code)}" style="margin:auto; width: 95%; " 
+                                        class="w3-button w3-text-white w3-hover-deep-orange w3-hover-opacity w3-deep-orange" value="Request" />
+                                </div>
+                                <div class="w3-justify w3-container w3-margin-top" style="list-style-type: none;">
+                                    <li><i class="fa fa-address-book" aria-hidden="true"></i>#{list.address}</li>
+                                    <li><i class="fa fa-address-book" aria-hidden="true"></i>#{list.zip_Code}</li>
+                                    <li><i class="fa fa-eur" aria-hidden="true" style="margin-right: 15px;"></i>#{list.price}</li>
+                                    <li><i class="fa fa-user" aria-hidden="true" style="margin-right: 13px;"></i>#{list.owner}</li>
+                                    <li><span class="fa fa-star checked" style="color: gold;margin-right: 10px;"></span>#{list.rate}</li>
+                                    <hr />
+                                    <p>#{list.properties}</p>
+                                </div>
+                            </div>
+                        </ui:repeat>
+                    </h:form>
+                </div>
+            </div>
+                
+            <div id="statistic-div" class="w3-container w3-padding-64 w3-content">
+                <h2>Statistic</h2>
+                <hr />
+            </div>
+
+            <div id="about" class="w3-container w3-content w3-padding-64" >
+                <h2>About</h2>
+                <hr/>	
+                <p>The House Manager project was developed by a team of students with the goal of making it easier for users to share and manage vacation houses.
+                Something we took in consideration was the simplicity of the website and making it more intuitive to improve the experience of the user. 
+                </p>
+                <p>When it comes to functionalities, the user has several options, such as :
+
+                    <li> Insert Properties; </li>
+                    <li> Request Properties; </li>
+                    <li> Book Properties; </li>
+                    <li> Remove Properties; </li>
+                    <li> Rate Properties; </li>
+                    <li> Consult Properties. </li>
+                </p>
+
+                <p>If you have any suggestion or want to reach out to us, go ahead to the Team section and email any of the staff members.
+                We'll get back to you as soon as possible.
+                </p>
+            </div>
+                
+            <!-- Team -->
+            <div id="team" class="w3-container w3-content w3-padding-64">
+                <h2>Team</h2>
+                <hr />
+                <div id="team-div-container" class="w3-row w3-center w3-padding-16">
+                    <div class="w3-quarter">
+                        <img class="w3-image round-image" src="img/person.png" alt="António" />
+                        <p>António Sardinha</p>
+                        <a href="mailto:antonio.sardinha@ubi.pt">e-mail</a>
+                    </div>
+                    <div class="w3-quarter">
+                        <img class="w3-image round-image" src="img/person.png" alt="Pedro" />
+                        <p>Pedro Brito</p>
+                        <a href="mailto:jorge.brito@ubi.pt">e-mail</a>
+                    </div>
+                    <div class="w3-quarter">
+                        <img class="w3-image round-image" src="img/person.png" alt="Ricardo" />
+                        <p>Ricardo Ribeiro</p>
+                        <a href="mailto:ricardo.andre.pereira.ribeiro@ubi.pt">e-mail</a>
+                    </div>
+                    <div class="w3-quarter">
+                        <img class="w3-image round-image" src="img/person.png" alt="Rui" />
+                        <p>Rui Raposo</p>
+                        <a href="mailto:rui.raposo@ubi.pt">e-mail</a>
+                    </div>
+                </div>
+            </div>
+                
+            <!-- FAQ -->
+            <div id="faq" class="w3-container w3-content w3-padding-64">
+                <h2>FAQ</h2>
+                <hr />
+                <div id="list-1" class="w3-justify w3-container w3-margin-bottom" style="list-style-type: none;">
+                    <li style="color:black"><span class="fa fa-star checked" ></span> How can I turn my house available for rent?</li>
+                    <p>In order to do this, you have to be registered and logged in. Then, go to your <b>profile</b> and check the
+                        <a href="account.html"><b>New House</b></a> section and follow the current steps.</p>
+                    <li style="color:black" ><span class="fa fa-star checked" ></span> Who provides the house's rate?</li>
+                        <p>The clients who already rented a specific house, after delivering it, they can rate the house out of 10.</p>
+                    <li style="color:black"><span class="fa fa-star checked" ></span> How can I get in touch with the website's owner?</li>
+                    <p>Check the <b>Team</b> section and look for our e-mails.</p>
+                </div>
+            </div>
+        </div>
+
+    </h:body>
+    
+    <script type="text/javascript">
+        
+        var elem = document.getElementById("navbar-id");
+        var elem2 = document.getElementById("titulo");
+        var opacity = 0.02;
+        var id = setInterval(frame, 1);
+  
+        function frame() {
+            if (opacity >= 1) {
+                document.getElementById("rest").style.display = "block";
+                document.getElementById("my-houses").scrollIntoView({behavior: "smooth"});
+                clearInterval(id);
+            } else {
+                opacity += 0.002;
+                elem.style.opacity = opacity;
+                elem2.style.opacity = opacity;
+            }
+            console.log(opacity);
+        }
+        
+        function something(id){
+            
+            var last2 = id.slice(-2);
+            var specific_item = "";
+            
+            if(last2 == "up"){
+                specific_item = id.substr(3, id.length - 6);
+                // hide
+                document.getElementById("id_"+specific_item+"_up").style.display = "none";
+                document.getElementById("id_"+specific_item+"_data").style.display = "none";
+                // show
+                document.getElementById("id_"+specific_item+"_down").style.display = "block";
+                // height
+                document.getElementById("list_"+specific_item).style.height = "auto";
+                document.getElementById("list_"+specific_item).style.background = "white";
+            }
+            else{
+                specific_item = id.substr(3, id.length - 8);
+                // hide
+                document.getElementById("id_"+specific_item+"_down").style.display = "none";
+                document.getElementById("id_"+specific_item+"_data").style.display = "block";
+                // show
+                document.getElementById("id_"+specific_item+"_up").style.display = "block";
+                // height
+                document.getElementById("list_"+specific_item).style.height = "668px";
+                document.getElementById("list_"+specific_item).style.background = "rgb(255,255,255)";
+                document.getElementById("list_"+specific_item).style.background = "linear-gradient(180deg, rgba(255,255,255,1) 52%, rgba(255,182,110,1) 80%, rgba(78,182,255,1) 96%)";
+            }
+        }
+
+
+        // Used to toggle the menu on small screens when clicking on the menu button
+        function toggleFunction() {
+            var x = document.getElementById("navDemo");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+        
+        
+        
+        
+        
+        
+   </script>
+    
+    
+</html>
+
+
+
+

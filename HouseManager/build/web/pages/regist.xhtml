@@ -4,18 +4,18 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
+        <link rel="icon" type="image/png" href="images/bird.png" />
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-        <title>Facelet Title</title>
+        <title>Register</title>
     </h:head>
 
     <style type="text/css">
         body, html {
             line-height: 1.8;
-            height: 100%;
             color: black;
-            background: rgb(244,232,204);
-            background: linear-gradient(0deg, rgba(244,232,204,1) 40%, rgba(250,192,64,1) 59%, rgba(255,188,53,1) 100%);
+            background-color: #000030;
+            background-image: url("img/new_bgtucan.jpg");
         }
 
         /* Create a Parallax Effect */
@@ -29,6 +29,21 @@
         /* First image (Logo. Full height) */
         .bgimg-1 {
             margin-top: 9%;
+        }
+
+        h1{
+            font-family: 'DistantStroke' !important;
+            color: white;
+            font-weight: bold;
+            font-size: 80px;
+        }
+
+        @font-face {
+            font-family: 'DistantStroke';
+            src: url('packages/DistantStroke.eot?#iefix') format('embedded-opentype'),  url('packages/DistantStroke.otf')  format('opentype'),
+                 url('packages/DistantStroke.woff') format('woff'), url('packages/DistantStroke.ttf')  format('truetype'), url('packages/DistantStroke.svg#DistantStroke') format('svg');
+            font-weight: normal;
+            font-style: normal;
         }
 
         input{
@@ -63,40 +78,35 @@
             <f:viewAction action = "#{User.restartData()}"></f:viewAction>
         </f:metadata>
         
-        <!-- Title -->
-        <div id="title" class="w3-container w3-center">
-            <h:form>
-                <img style="margin-top: 8%;margin-bottom: 35px" src="images/fafao-removebg-preview.png" />
-                <br/>
-                <i class="fa fa-user-o" style="margin-right: 2px;font-size:28px"></i>
-                <h:inputText binding="#{username}" style="width: 20%;display: inline"  class="w3-input w3-border-black w3-border-bottom"  
-                    required="" />
-                <br/>
-                <i class="fa fa-lock" style="margin-top: 25px;margin-right: 6px;font-size:28px"></i>
-                <h:inputSecret binding="#{password}" class="w3-input w3-border-black w3-border-bottom" style="width: 20%;display: inline" 
-                    required="" />
-                <br/>
-                <i class="fa fa-lock" style="margin-top: 25px;margin-right: 6px;font-size:28px"></i>
-                <h:inputSecret binding="#{password2}" class="w3-input w3-border-black w3-border-bottom" style="width: 20%;display: inline" required="" />
-                <br/>
-                <h:commandButton id="butt-sign-in" style="background-color: #273c4e; display:inline;margin:auto; width: 20%; margin-top: 40px;" 
-                    class="w3-button w3-hover-opacity w3-text-white w3-block w3-padding-large w3-round-large w3-margin-bottom" 
-                    action="#{User.signUpFunction(username.value, password.value, password2.value)}" value="Sign Up" />
-                <br/>
-            </h:form>
+        <div id="main" class="w3-display-container w3-display-middle">
+            <div id="menu" class="w3-container w3-row">
+                <div class="w3-half w3-container">
+                    <h1>House Manager</h1>
+                    <h3 style="color: white;text-decoration: underline;">Register</h3>
+                    <h:form style="margin-top: 60px;">
+                        <i class="fa fa-user-o" style="margin-right: 6px;font-size:28px;color: white;"></i>
+                        <h:inputText binding="#{username}" style="width: 80%;display: inline"  class="w3-text-white w3-input w3-border-white w3-border"  
+                            required="" />
+                        <br/>
+                        <i class="fa fa-lock" style="margin-top: 25px;margin-right: 9px;font-size:28px; color: white;"></i>
+                        <h:inputSecret binding="#{password}" class="w3-text-white w3-input w3-border-white w3-border" style="width: 80%;display: inline" 
+                            required="" />
+                        <br/>
+                        <i class="fa fa-lock" style="margin-top: 25px;margin-right: 9px;font-size:28px; color: white;"></i>
+                        <h:inputSecret binding="#{password2}" class="w3-text-white w3-input w3-border-white w3-border" style="width: 80%;display: inline" required="" />
+                        <br/>
+                        <h:commandButton id="butt-sign-in" style="background-color: #f8750d;margin-left: 27px; display:inline; width: 80%; margin-top: 20px;" 
+                            class="w3-button w3-hover-opacity w3-text-white w3-hover-deep-orange w3-block w3-padding-large w3-margin-bottom" 
+                            action="#{User.signUpFunction(username.value, password.value, password2.value)}" value="Sign Up" />
+                        <br/>
+                        <label jsfc="h:messages"  style="color:red;" />
+                    </h:form>
+                </div>
+                <div class="w3-half w3-center" style="margin-top: 80px;">
+                    <img class="w3-image" src="img/tucan-regist.png" />
+                </div>
+            </div>
         </div>
-
-        <!-- Footer -->
-        <footer class="w3-center w3-bottom w3-padding-32" style="background-color: #273c4e;  margin-top: 100px;">
-            <a id="git" style="text-decoration: none;" href="https://github.com/rui-raposo/SD-Project">
-                <img class="round-photo-icon" src="images/git-new.png"/>
-            </a>
-            <a id="w3" style="text-decoration: none;" href="https://www.w3schools.com/css/default.asp">
-                <img style="margin-left: 15px;width: 80px; height: 60px" src="images/w3"/>
-            </a>
-            <img src="images/java-removebg-preview.png" style="margin-right: 20px;width: 80px; height: 60px;"/>
-            <img class="round-photo-icon" src="images/netb-removebg-preview.png"/>
-        </footer>
+        
     </h:body>
 </html>
-

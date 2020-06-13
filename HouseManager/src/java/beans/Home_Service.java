@@ -49,7 +49,7 @@ public class Home_Service implements Serializable{
         // restart the arraylist
         this.list_houses = new ArrayList<Houses>();
         // variables for future loop
-        String address, zip_code, owner, properties;
+        String address, zip_code, owner, properties, path;
         float value;
         int evaluation, count = 0;
         
@@ -62,7 +62,7 @@ public class Home_Service implements Serializable{
         
         try{
             // check if there's any user with that properties
-            ResultSet x = ps.executeQuery("SELECT H.PROPERTIES, H.ADDRESS, H.ZIP_CODE, H.VALUE, H.EVALUATION, H.OWNER FROM "
+            ResultSet x = ps.executeQuery("SELECT H.IMG, H.PROPERTIES, H.ADDRESS, H.ZIP_CODE, H.VALUE, H.EVALUATION, H.OWNER FROM "
             + "HOUSES H LEFT JOIN PROCESS P ON H.ADDRESS = P.ADDRESS AND H.ZIP_CODE = P.ZIP_CODE");
             // returns in 'list' form
             while (x.next()) {
@@ -86,8 +86,10 @@ public class Home_Service implements Serializable{
                 owner = x.getString("owner");
                 // get properties
                 properties = x.getString("properties");
+                // get image path
+                path = x.getString("img");
                 // create object
-                Houses obj = new Houses(owner, address, zip_code, properties, evaluation);
+                Houses obj = new Houses(owner, address, zip_code, properties, value, evaluation, path);
                 // check if its already in array
                 if(checkData(obj)){
                     // append in arraylist
@@ -96,6 +98,7 @@ public class Home_Service implements Serializable{
             }
         }catch(SQLException  e){
         };
+        
 
         // close the connection and the statement
         con.close();
@@ -135,12 +138,14 @@ public class Home_Service implements Serializable{
         }
         
         // integer variable
-        int c = 0;
+        int c = 0, id = 0;
         // connection to the database
         Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/ProjectDB", "raposo","raposo0990123");
         // prepare to create a statement
         Statement ps = con.createStatement();
         Statement ps2 = con.createStatement();
+        Statement ps3 = con.createStatement();
+        Statement ps4 = con.createStatement();
         
         try{
             // getting the max value in position table's attribue (PROCESS)
@@ -152,8 +157,16 @@ public class Home_Service implements Serializable{
             }
             // insert in database
             ps2.executeUpdate("INSERT INTO PROCESS VALUES('" + username + "','" + address + "','" + zip_code + "','Good'," + c + ")");
+            
+            // get last id
+            ResultSet y = ps3.executeQuery("SELECT MAX(id) as id FROM History");
+            // get id
+            while(y.next()){
+                id = y.getInt("id");
+                id++;
+            }
             // append in history table
-            ps.executeUpdate("INSERT INTO HISTORY(address, zip_code, username) VALUES('" + address + "', '" + zip_code + "', '" + username +"')");
+            ps4.executeUpdate("INSERT INTO HISTORY VALUES(" + id + ",'" + address + "', '" + zip_code + "', '" + username +"')");
         }catch(SQLException  e){};
         
         // close the connection and the statement

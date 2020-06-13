@@ -2,20 +2,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
+        <link rel="icon" type="image/png" href="images/bird.png" />
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-        <title>Facelet Title</title>
+        <title>Welcome</title>
     </h:head>
 
     <style type="text/css">
         body, html {
             line-height: 1.8;
+            color: white;
             height: 100%;
-            color: black;
-            background: rgb(244,232,204);
-            background: linear-gradient(0deg, rgba(244,232,204,1) 40%, rgba(250,192,64,1) 59%, rgba(255,188,53,1) 100%);
+            background-image: url('img/new_bgtucan.jpg');
+        }
+
+        h1{
+            font-family: 'DistantStroke' !important;
+            color: white;
+            font-weight: bold;
+            font-size: 100px;
+        }
+
+        @font-face {
+            font-family: 'DistantStroke';
+            src: url('packages/DistantStroke.eot?#iefix') format('embedded-opentype'),  url('packages/DistantStroke.otf')  format('opentype'),
+                 url('packages/DistantStroke.woff') format('woff'), url('packages/DistantStroke.ttf')  format('truetype'), url('packages/DistantStroke.svg#DistantStroke') format('svg');
+            font-weight: normal;
+            font-style: normal;
         }
 
         /* Create a Parallax Effect */
@@ -63,80 +79,37 @@
             <f:viewAction action = "#{User.restartData()}"></f:viewAction>
         </f:metadata>
 
-        <!-- Title -->
-        <div id="title" class="w3-container w3-center">
-            <h:form>
-                <img style="margin-top: 6%;margin-bottom: 20px" src="images/banner-image2-removebg-preview.png" />
-                <br/>
-                <i class="fa fa-user-o" style="margin-right: 2px;font-size:28px"></i>
-                <h:inputText style="width: 20%;display: inline" binding="#{username}" class="w3-input w3-border-black w3-border-bottom" required="" />
-                <br/>
-                <i class="fa fa-lock" style="margin-top: 25px;margin-right: 6px;font-size:28px"></i>
-                <h:inputSecret class="w3-input w3-border-black w3-border-bottom" binding="#{password}" style="width: 20%;display: inline" required="" />
-                <br/>
-                <h:commandButton id="butt-sign-in" type="submit" style="background-color: #273c4e;display:inline;margin:auto; width: 20%; 
-                    margin-top: 40px;" class="w3-button w3-text-white w3-block w3-padding-large w3-round-large w3-margin-bottom" 
-                    value="Sign In" action="#{User.signInFunction(username.value, password.value)}" />
-                <br/>
-                <h:button outcome="home.xhtml" style="margin-right: 38px;display: inline;width: 9%;" class="w3-button w3-hover-gray w3-gray 
-                    w3-hover-opacity w3-text-white w3-block  w3-padding-large w3-round-large w3-margin-bottom" value="Guest" />
-                <h:button id="register-button" style="display: inline;width: 9%;" class="w3-button w3-hover-gray w3-gray 
-                    w3-hover-opacity w3-text-white w3-block w3-padding-large w3-round-large w3-margin-bottom" outcome="regist.xhtml" value="Register Now" />
-            </h:form>
+        <div class="w3-display-container w3-display-middle">
+            <div id="main" class="w3-container w3-row">
+                <div id="right-side" class="w3-half" style="margin-top: 50px;">
+                    <h:form>
+                        <h1>HouseManager</h1>
+                        <i class="fa fa-user-o" style="margin-right: 6px;font-size:28px"></i>
+                        <h:inputText style="width: 80%;display: inline" binding="#{username}" class="w3-input w3-border w3-border-white w3-text-white w3-margin-bottom" required="" />
+                        <br/>
+                        <i class="fa fa-lock" style="margin-right: 11px;font-size:28px"></i>
+                        <h:inputSecret class="w3-input w3-margin-bottom w3-border-white w3-text-white" binding="#{password}" style="border: solid 1px black; width: 80%;display: inline" required="" />
+                        <br/>
+                        <h:commandButton id="butt-sign-in" type="submit" style="display:inline;margin:auto; width: 80%; margin-left: 29px; background-color: #f8750d;" 
+                        class="w3-button w3-text-white w3-hover-deep-orange w3-hover-opacity 
+                                        w3-block w3-padding-large w3-margin-bottom" 
+                                        value="Sign In" action="#{User.signInFunction(username.value, password.value)}" />
+                        
+                        <br/>
+                        <h:button outcome="home.xhtml" style="margin-left: 29px; display: inline;width: 80%;" class="w3-button w3-hover-gray
+                                w3-gray w3-hover-opacity w3-text-white w3-block  w3-padding-large w3-margin-bottom" value="Guest" />
+                        <label jsfc="h:messages"  style="color:red;" />
+                    </h:form>
+                </div>
+                <div id="left-side" class="w3-half">
+                    <img id="img_1" src="img/gif_tucan.gif" /> 
+                </div>
+                <div id="register-part" class="w3-center w3-container">
+                    <a style="font-size: 19px;" class="w3-center" href="regist.xhtml">Register Now</a>
+                </div>
+            </div>     
         </div>
         
-        <!-- Footer -->
-        <footer class="w3-center w3-bottom w3-padding-32" style="background-color: #273c4e;  margin-top: 100px;">
-            <a id="git" style="text-decoration: none;" href="https://github.com/rui-raposo/SD-Project">
-                <img class="round-photo-icon" src="images/git-new.png"/>
-            </a>
-            <a id="w3" style="text-decoration: none;" href="https://www.w3schools.com/css/default.asp">
-                <img style="margin-left: 15px;width: 80px; height: 60px" src="images/w3"/>
-            </a>
-            <img src="images/java-removebg-preview.png" style="margin-right: 20px;width: 80px; height: 60px;"/>
-            <img class="round-photo-icon" src="images/netb-removebg-preview.png"/>
-        </footer>
     </h:body>
-<<<<<<< Updated upstream
-=======
 
-    <script>
-        var elem = document.getElementById("image_id");
-        var elem2 = document.getElementById("login-form");
-        var pos = 0;
-        var opacity = 0.03;
-        var reach_y = 200;
-        var pos_y = 0;
-        var id = setInterval(frame, 1);
-        function frame() {
-
-            if (reach_y == 200)
-                reach_y = 0;
-            else if (reach_y == 0)
-                reach_y = 200;
-
-            if (pos == 560) {
-                clearInterval(id);
-                //document.getElementById("img_1").style.display = "none";
-                //document.getElementById("img_2").style.display = "block";
-            } else {
-                pos += 2;
-                if (reach_y > 0) {
-                    pos_y += 20;
-                } else {
-                    pos_y -= 20;
-                }
-
-                opacity += 0.003;
-
-                elem2.style.opacity = opacity;
-
-                elem.style.top = pos_y + 'px'
-                elem.style.left = pos + 'px';
-            }
-        }
-    </script>
-
->>>>>>> Stashed changes
 </html>
-

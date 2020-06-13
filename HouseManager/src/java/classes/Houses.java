@@ -7,14 +7,24 @@ public class Houses {
     private String properties;
     private int rate;
     private float price;
+    private String path;
 
-    public Houses(String owner, String address, String zip_Code, String properties, float price) {
+    public Houses(String owner, String address, String zip_Code, String properties, float price, int rate, String path) {
         this.owner = owner;
         this.address = address;
         this.zip_Code = zip_Code;
         this.price = price;
         this.properties = properties;
-        this.rate = 5;
+        this.rate = rate;
+        this.path = path;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public String getOwner() {

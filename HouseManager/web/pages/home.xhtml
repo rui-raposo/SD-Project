@@ -6,28 +6,26 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-        <title>Facelet Title</title>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/png" href="images/bird.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+        <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-signal.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-2019.css" />
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-2017.css" />
+        <script src="jquery-3.5.1.min.js"></script>
+        <title>Home</title>
     </h:head>
 
     <style type="text/css">
-<<<<<<< Updated upstream
-        body, html {
-            line-height: 1.5;
-            color: black;
-            background: rgb(244,232,204);
-            background: linear-gradient(0deg, rgba(244,232,204,1) 40%, rgba(250,192,64,1) 59%, rgba(255,188,53,1) 100%);
+        
+        #myNavbar, #navDemo{
+            background-color: #000030;
         }
-
-        a.active:hover{
-            background: #F99A05;
-        }
-
-        .round-photo {
-            width:200px;
-            height:200px;
-=======
 
         body, html {
             height: 100%;
@@ -39,13 +37,8 @@
         .round-photo {
             width:95%;
             height: 250px;
->>>>>>> Stashed changes
             object-fit:cover;
-            border-radius:50%;
-            border: 1.5px solid black;
         }
-<<<<<<< Updated upstream
-=======
 
         .round-image {
             width:195px;
@@ -62,10 +55,16 @@
             font-size: 150px;
         }
 
+        h4{
+            font-family: 'DistantStroke' !important;
+            color: white;
+            font-weight: bold;
+            font-size: 80px;
+        }
+
         .bgimg-1{
-            /* https://unsplash.com/photos/Q1p7bh3SHj8 */
-            background-image: url('img/bgblack.jpg');
-            opacity: 0.7;
+            /* https://wallpaperset.com/wall/eyJpdiI6ImhoZVNPRkZSTk9xMlgyNThCK3RFUXc9PSIsInZhbHVlIjoiVHVJUXBQbXh4OGlpV0wrMGwwekR3dz09IiwibWFjIjoiNTM0NWIxNGQ0Njk4MjUwY2U5Y2E4MmMzNjlmYmEyZjk1YTdlMWZiMWJkOTFiYjVjMDdlNzM3ZDgzOThhYTBkMiJ9 */
+            background-image: url('img/new_background.jpg');
             height: 100%;
             background-attachment: fixed;
             background-position: center;
@@ -92,256 +91,84 @@
         
         .imagewrap {display:inline-block;position:relative;}
         .button1 {position:absolute;bottom:0;left:0;}
->>>>>>> Stashed changes
 
-        .round-photo-icon {
-            width:50px;
-            height:50px;
-            object-fit:cover;
-            border-radius:50%;
-        }
+    
     </style>
     
     <script type="text/javascript">
-        function test(data,data2){
-            //alert(data + "   " + data2);
+        
+        function draw(arr){
+            var chart = new CanvasJS.Chart("graphic-zone", {
+                legend:{
+                    cursor: "pointer",
+                },
+                data: [{
+                    type: "pie",
+                    showInLegend: true,
+                    toolTipContent: "{name}: <strong>{y}%</strong>",
+                    indexLabel: "{name} - {y}%",
+                    dataPoints: [
+                        { y: arr[0], name: "1 Star"  },
+                        { y: arr[1], name: "2 Stars" },
+                        { y: arr[2], name: "3 Stars" },
+                        { y: arr[3], name: "4 Stars" },
+                        { y: arr[4], name: "5 Stars" },
+                    ]
+                }]
+            });
+            chart.render();
         }
+
+        function test(data){
+            var arr = data.split(",");
+            arr.pop();
+            draw(arr);
+        }
+
+        
+
     </script>
 
-<<<<<<< Updated upstream
-    <h:body>
-
-=======
-    <h:body onload="test('#{User.username}','#{User.password}')">
+    <h:body onload="test('#{Service.setGraphic()}')">
         
->>>>>>> Stashed changes
         <!-- Valid Data --> 
         <f:metadata>
-            <!--<f:viewAction action = "#{User.validUserData('home.xhtml')}"></f:viewAction>-->
             <f:viewAction action = "#{Home_Service.updateHousesArray(User.username)}"></f:viewAction>
         </f:metadata>
-<<<<<<< Updated upstream
-
-        <!-- Top Bar With Login -->
-        <div class="w3-top">
-            <div style="background-color: #F5A927" class="w3-bar w3-text-black w3-card-4 w3-animate-top w3-text-white" id="myNavBar">
-                <a class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button w3-border-right w3-border-white">Home</a>
-                <a href="#news" class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button">
-                    <i class="fa fa-th" style="margin-right: 10px"></i>News</a>
-                <a href="#my-houses" class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button">
-                    <i class="fa fa-home" style="margin-right: 10px" aria-hidden="true"></i>Houses</a>
-                <a href="#about" class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button">
-                    <i class="fa fa-bookmark" aria-hidden="true" style="margin-right: 10px"></i>About</a>
-                <a href="#team" class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button">
-                    <i class="fa fa-users" style="margin-right: 10px" aria-hidden="true"></i>Team</a>
-                <a href="#faq" class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button">
-                    <i class="fa fa-question-circle" style="margin-right: 10px" aria-hidden="true"></i>FAQ</a>
-                <c:choose>
-                    <c:when test="#{User.username != ''}" >
-                        <a href="intro.xhtml" class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button w3-right">
-                            <i class="fa fa-sign-out" style="margin-right: 10px" aria-hidden="true"></i>Logout</a>
-                        <a href="profile.xhtml" class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button w3-right">
-                            <i class="fa fa-user" aria-hidden="true" style="margin-right: 10px"></i>Profile</a>
-                    </c:when>
-                    <c:otherwise>
-                        <a href="intro.xhtml" class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button w3-right">
-                            <i class="fa fa-key " style="margin-right: 10px" aria-hidden="true"></i>Sign In</a>
-                        <a href="regist.xhtml" class="w3-padding-16 w3-bar-item w3-hover-opacity w3-button w3-right">
-                            <i class="fa fa-user-plus" aria-hidden="true" style="margin-right: 10px"></i>Register Now</a>
-                    </c:otherwise>
-                </c:choose> 
-            </div>
-        </div>
-        
-        
-
-        <!-- News -->
-        <div id="news" class="w3-justify w3-container w3-padding-64" style="margin-left: 17%; margin-right: 17%;margin-top: 50px">
-            <h2><i class="fa fa-th" style="margin-right: 10px"></i>News</h2>
-            <hr style=" border-color: black; border: 1.5px solid black"/>
-            <!-- Frontend New -->
-            <div id="new-1" class="w3-justify">
-                <li>Development of intro and register page.</li>
-                <label style="font-size: 10px;font-style: italic">18 May 2020</label>
-            </div>
-            <!-- Back-end New-->
-            <div id="new-1" class="w3-justify">
-                <li>Backend development for regist/login.</li>
-                <label style="font-size: 10px;font-style: italic">20 May 2020</label>
-            </div>
-        </div>
-        
-        <div id="my-houses" class="w3-justify w3-container w3-padding-64" style="margin-right: 17%; margin-left: 17%;margin-top: 50px;">
-            <h2 class="w3-justify"><i class="fa fa-home" style="margin-right: 10px" aria-hidden="true"></i>Houses</h2>
-            <hr style=" border-color: black; border: 1.5px solid black"/>
-            <ul style="" class="w3-margin-top w3-ul w3-card-4" >
-                <h:form>
-                    <ui:repeat value="#{Home_Service.list_houses}" var="list">
-                        <li class="w3-bar w3-half w3-justify">
-                            <img src="images/casa-de-neve.jpg" class="round-photo w3-bar-item" style="width:200px" />
-                            <div class="w3-bar-item">
-                                <span class="w3-large">#{list.address}</span>
-                                <br/>
-                                <span>#{list.zip_Code}</span>
-                                <br/>
-                                <span>#{list.price}</span>
-                                <br/>
-                                <span>#{list.owner}</span>
-                                <br/>
-                                <span>#{list.rate}</span>
-                                <br/>
-                                <p>#{list.properties}</p>
-                            </div>
-                            <h:commandButton action="#{Home_Service.requestHouse(User.username, list.address, list.zip_Code)}" style="background-color: #273c4e;margin:auto; width: 100%; margin-top: 20px;" 
-                                class="w3-button w3-margin-bottom w3-text-white w3-block w3-padding-large w3-round-large" value="Request" />
-                        </li>
-                    </ui:repeat>
-                </h:form>
-            </ul>
-        </div>
-
-        <!-- About -->
-        <div id="about" class="w3-justify w3-container w3-padding-64" style="margin-left: 17%; margin-right: 17%; margin-top: 50px">
-            <h2><i class="fa fa-bookmark" aria-hidden="true" style="margin-right: 10px"></i>About</h2>
-            <hr style="border-color: black; border: 1.5px solid black"/>	
-            <p> This project approaches the two sides of the investment on real estate.
-                On one side we have the investor that wants to place his properties to rent; in the other hand, we have the client 
-                that is looking for a property to rent and consequently inhabit.
-            </p>
-            <p> In an attempt to support both sides, we focus on develop a simple and intuitive website. We provide the following functionalities:
-                <li>Insert a property;</li>
-                <li>Request a property;</li>
-                <li>Book a property;</li>
-                <li>Remove a property;</li>
-                <li>Consult a property.</li>
-            </p>
-            <p>
-                Due to this, the work plan is divided into five research and development activities, and the report writing.
-            </p>
-
-            <!-- Activity -->
-            <i class="fa fa-code" aria-hidden="true"></i> 1.  Contextualization with the proposed goals and work environment setup
-            <br/>
-            <label style="font-size: 10px">Starting at week 0 and ending at week 1.</label>
-            <div id="id-bar-section1" class="w3-center">
-                <div class="w3-border w3-border-black">
-                    <div id="bar1" style="color:white;background-color:#273c4e;width:100%">100%</div>
-                </div>
-            </div>	
-            <br/>
-            <i class="fa fa-code" aria-hidden="true"></i> 2. Definition of all the frameworks to be used in this project
-            <br/>
-            <label style="font-size: 10px">Starting at week 0 and ending at week 1.</label>
-            <div id="id-bar-section2" class="w3-center">
-                <div class="w3-border w3-border-black">
-                    <div id="bar2" style="color:white;background-color:#273c4e;width:100%">100%</div>
-                </div>
-            </div>	
-            <br/>
-            <i class="fa fa-code" aria-hidden="true"></i> 3. Backend implementation
-            <br/>
-            <label style="font-size: 10px">Starting at week 1 and ending at week 3.</label>
-            <div id="id-bar-section3" class="w3-center">
-                <div class="w3-border w3-border-black">
-                    <div id="bar3" style="color:white;background-color:#273c4e;width:30%">30%</div>
-                </div>
-            </div>	
-            <br/>
-            <i class="fa fa-code" aria-hidden="true"></i> 4. Frontend implementation
-            <br/>
-            <label style="font-size: 10px">Starting at week 2 and ending at week 3.</label>
-            <div id="id-bar-section4" class="w3-center">
-                <div class="w3-border w3-border-black">
-                    <div id="bar4" style="color:white;background-color:#273c4e;width:40%">40%</div>
-                </div>
-            </div>	
-            <br/>
-            <i class="fa fa-code" aria-hidden="true"></i> 5. Analysis and system tests
-            <br/>
-            <label style="font-size: 10px">Starting at week 3 and ending at week 4.</label>
-            <div id="id-bar-section5" class="w3-center">
-                <div class="w3-border w3-border-black">
-                    <div id="bar5" style="color:white;background-color:#273c4e;width:0%">0</div>
-                </div>
-            </div>	
-            <br/>
-            <i class="fa fa-code" aria-hidden="true"></i> 6. Report
-            <br/>
-            <label style="font-size: 10px">Starting at week 0 and ending at week 4.</label>
-            <div id="id-bar-section6" class="w3-center">
-                <div class="w3-border w3-border-black">
-                    <div id="bar6" style="color:white;background-color:#273c4e;width:0%">0</div>
-                </div>
-            </div>	
-        </div> 
-        
-        <!-- Team -->
-        <div id="team" class="w3-container w3-justify w3-padding-64" style="margin-left: 17%; margin-right: 17%; margin-top: 50px">
-            <h2><i class="fa fa-users" aria-hidden="true" style="margin-right: 10px"></i>Team</h2>
-            <hr style="border-color: black; border: 1.5px solid black" />
-            <div id="members" class="w3-center w3-bar">
-                <div id="to-sardinha" class="w3-quarter">
-                    <img style="margin-bottom: 5px" class="round-photo" src="images/user.svg" />
-                    <br/>
-                    António Sardinha
-                    <br/>
-                    <a href="mailto:antonio.sardinha@ubi.pt">e-mail</a>
-                </div>
-                <div id="to-sardinha" class="w3-quarter">
-                    <img style="margin-bottom: 5px" class="round-photo" src="images/user.svg" />
-                    <br/>
-                    Pedro Brito
-                    <br/>
-                    <a href="mailto:jorge.brito@ubi.pt">e-mail</a>
-                </div>
-                <div id="to-sardinha" class="w3-quarter">
-                    <img style="margin-bottom: 5px" class="round-photo" src="images/user.svg" />
-                    <br/>
-                    Ricardo Ribeiro
-                    <br/>
-                    <a href="mailto:ricardo.andre.pereira.ribeiro@ubi.pt">e-mail</a>
-                </div>
-                <div id="to-sardinha" class="w3-quarter">
-                    <img style="margin-bottom: 5px" class="round-photo" src="images/user.svg" />
-                    <br/>
-                    Rui Raposo
-                    <br/>
-                    <a href="mailto:rui.raposo@ubi.pt">e-mail</a>
-=======
         
         <!-- Image background -->
         <div id="main-title-bg" class="bgimg-1 w3-display-container">
             <div id="main-title" class="w3-display-middle w3-center" style="white-space:nowrap;">
-                <h1 id="titulo" class="w3-margin-bottom">Welcome</h1>
             </div>
+            <h1 id="titulo" class="w3-text-white w3-display-position" style="margin-left: 400px;margin-top: 100px;">Welcome</h1>
+            <h1 id="titulo2" class="w3-display-bottommiddle w3-display-position w3-text-white" style="margin-left: 500px;margin-bottom: 100px;">HouseManager</h1>
         </div>
 
         <!-- Navigation Bar -->
         <div id="navbar-id" class="w3-top">
-            <div class="w3-bar w3-text-white w3-blue w3-card-4" id="myNavbar">
-                <a class="w3-bar-item w3-button w3-hover-blue w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+            <div class="w3-bar w3-text-white w3-card-4" id="myNavbar">
+                <a class="w3-bar-item w3-button w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
                     <i style="color:white" class="fa fa-bars"></i></a>
-                <a href="#home" class="w3-bar-item w3-button w3-hover-blue w3-hover-opacity ">HOME</a>
-                <a href="#news" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-blue w3-hover-opacity ">NEWS</a>
-                <a href="#about" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-blue w3-hover-opacity ">HOUSES</a>
-                <a href="#activities" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-blue w3-hover-opacity ">ABOUT</a>
-                <a href="#team" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-blue w3-hover-opacity ">TEAM</a>
-                <a href="#outputs" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-blue w3-hover-opacity ">FAQ</a>
+                <a href="#home" class="w3-bar-item w3-button w3-hover-opacity ">HOME</a>
+                <a href="#news" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-opacity ">NEWS</a>
+                <a href="#about" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-opacity ">HOUSES</a>
+                <a href="#activities" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-opacity ">ABOUT</a>
+                <a href="#team" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-opacity ">TEAM</a>
+                <a href="#outputs" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-opacity ">FAQ</a>
                 <c:choose>
                     <c:when test="#{User.username != ''}" >
-                        <a href="intro.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-blue w3-hover-opacity ">LOGOUT</a>
-                        <a href="profile.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-blue w3-hover-opacity ">PROFILE</a>
-                        
+                        <a href="intro.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-opacity ">LOGOUT</a>
+                        <a href="profile.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-opacity ">PROFILE</a>
                     </c:when>
                     <c:otherwise>
-                        <a href="regist.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-blue w3-hover-opacity ">REGISTER NOW</a>
-                        <a href="intro.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-blue w3-hover-opacity ">SIGN IN</a>
+                        <a href="regist.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-opacity ">REGISTER NOW</a>
+                        <a href="intro.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-opacity ">SIGN IN</a>
                     </c:otherwise>
                 </c:choose>
             </div>
 
             <!-- Navbar on small screens -->
-            <div id="navDemo" class="w3-bar-block w3-blue w3-text-white w3-hide w3-hide-large">
+            <div id="navDemo" class="w3-bar-block w3-text-black w3-hide w3-hide-large">
                 <a href="#news" class="w3-bar-item w3-button" onclick="toggleFunction()">NEWS</a>
                 <a href="#about" class="w3-bar-item w3-button" onclick="toggleFunction()">ABOUT</a>
                 <a href="#activities" class="w3-bar-item w3-button" onclick="toggleFunction()">ACTIVITIES</a>
@@ -363,16 +190,18 @@
             
         <div id="rest" style="display: none;" >
             <div id="my-houses" class="w3-justify w3-container w3-padding-64 w3-content">
-                <h2>Houses</h2>
+                <h2>Houses</h2>  
+                <p>In this section, we display to you all the available houses in our list.</p> 
+                <p>Feel free to request or book the one that you desire.</p>
                 <hr />
                 <div id="form-all" class="w3-row w3-container">
                     <h:form>
                         <ui:repeat value="#{Home_Service.list_houses}" var="list">
                             <div id="list_#{list.address}#{list.zip_Code}" class="w3-half w3-card-2 w3-padding-16 w3-border-white w3-justify" style="height: 600px;">
                                 <div class="w3-center">
-                                    <img id="img_#{list.address}#{list.zip_Code}" src="images/casa-de-neve.jpg" class="round-photo w3-bar-item w3-center" />
-                                    <h:commandButton action="#{Home_Service.requestHouse(User.username, list.address, list.zip_Code)}" style="margin:auto; width: 95%; " 
-                                        class="w3-button w3-text-white w3-hover-deep-orange w3-hover-opacity w3-deep-orange" value="Request" />
+                                    <img id="img_#{list.address}#{list.zip_Code}" src="#{list.path}" class="round-photo w3-bar-item w3-center" />
+                                    <h:commandButton action="#{Home_Service.requestHouse(User.username, list.address, list.zip_Code)}" style="background-color: #f8750d;margin:auto; width: 95%; " 
+                                        class="w3-button w3-text-white w3-hover-deep-orange w3-hover-opacity" value="Request" />
                                 </div>
                                 <div class="w3-justify w3-container w3-margin-top" style="list-style-type: none;">
                                     <li><i class="fa fa-address-book" aria-hidden="true"></i>#{list.address}</li>
@@ -391,7 +220,11 @@
                 
             <div id="statistic-div" class="w3-container w3-padding-64 w3-content">
                 <h2>Statistic</h2>
+                <p>Here below, we present you, in a pie graph, the amount (percentage) of houses grouped by their <i style="margin-left: 5px;" class="fa fa-star"></i>rate.</p>
                 <hr />
+                <div id="graphic-zone" class="w3-container" style="height: 400px">
+
+                </div>
             </div>
 
             <div id="about" class="w3-container w3-content w3-padding-64" >
@@ -455,62 +288,43 @@
                         <p>The clients who already rented a specific house, after delivering it, they can rate the house out of 10.</p>
                     <li style="color:black"><span class="fa fa-star checked" ></span> How can I get in touch with the website's owner?</li>
                     <p>Check the <b>Team</b> section and look for our e-mails.</p>
->>>>>>> Stashed changes
                 </div>
             </div>
         </div>
 
-<<<<<<< Updated upstream
-        <!-- FAQ -->
-        <div id="faq" class="w3-container w3-justify w3-padding-64" style="margin-left: 17%; margin-right: 17%; margin-top: 50px;">
-            <h2><i class="fa fa-question-circle" aria-hidden="true" style="margin-right: 10px"></i>FAQ</h2>
-            <hr style="border-color: black; border: 1.5px solid black" />
-            <li style="font-weight: bold">How can I turn my house available for rent?</li>
-            <p> In order to do this, you have to be registered and logged in. Then, go to your <b>profile</b> and check the
-                <a href="account.html"><b>New House</b></a> section and follow the current steps.
-            </p>
-            <li style="font-weight: bold">Who provides the house's rate?</li>
-            <p> The clients who already rented a specific house, after delivering it, they can rate the house out of 10.
-            </p>
-            <li style="font-weight: bold">How can I get in touch with the website's owner?</li>
-            <p> Check the <b>Team</b> section and look for our e-mails.
-            </p>
-        </div>
-        
-        <!-- Footer -->
-        <footer class="w3-center w3-padding-32" style="background-color: #273c4e;  margin-top: 100px;">
-            <a id="git" style="text-decoration: none;" href="https://github.com/rui-raposo/SD-Project">
-                <img class="round-photo-icon" src="images/git-new.png"/>
-            </a>
-            <a id="w3" style="text-decoration: none;" href="https://www.w3schools.com/css/default.asp">
-                <img style="margin-left: 15px;width: 80px; height: 60px" src="images/w3"/>
-            </a>
-            <img src="images/java-removebg-preview.png" style="margin-right: 20px;width: 80px; height: 60px;"/>
-            <img class="round-photo-icon" src="images/netb-removebg-preview.png"/>
-        </footer>
-    </h:body>
-=======
     </h:body>
     
     <script type="text/javascript">
         
         var elem = document.getElementById("navbar-id");
         var elem2 = document.getElementById("titulo");
+        var elem4 = document.getElementById("titulo2");
         var opacity = 0.02;
-        var id = setInterval(frame, 1);
+        var old_url = document.referrer;
+
+        if(old_url == "https://localhost:8181/HouseManager/faces/pages/intro.xhtml" || old_url == "https://localhost:8181/HouseManager/faces/pages/register.xhtml"){
+            var id = setInterval(frame, 1);
   
-        function frame() {
-            if (opacity >= 1) {
-                document.getElementById("rest").style.display = "block";
-                document.getElementById("my-houses").scrollIntoView({behavior: "smooth"});
-                clearInterval(id);
-            } else {
-                opacity += 0.002;
-                elem.style.opacity = opacity;
-                elem2.style.opacity = opacity;
+            function frame() {
+                if (opacity >= 1) {
+                    document.getElementById("rest").style.display = "block";
+                    document.getElementById("my-houses").scrollIntoView({behavior: "smooth"});
+                    clearInterval(id);
+                } else {
+                    opacity += 0.002;
+                    elem.style.opacity = opacity;
+                    elem2.style.opacity = opacity;
+                    elem4.style.opacity = opacity;
+                }
+                
             }
-            console.log(opacity);
         }
+        else{
+            elem2.style.opacity = 1;
+            document.getElementById("rest").style.display = "block";
+            document.getElementById("my-houses").scrollIntoView({behavior: "smooth"});
+        }
+        
         
         function something(id){
             
@@ -561,6 +375,4 @@
    </script>
     
     
->>>>>>> Stashed changes
 </html>
-

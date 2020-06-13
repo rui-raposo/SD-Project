@@ -8,8 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.ejb.Stateful;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,10 +25,10 @@ public class User implements Serializable{
     // Class variables
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
     private String username, password;
+    private int is_logged;
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
+    
 
-
-    // Getters and Setters
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
     public String getUsername() {
         return username;
@@ -79,10 +82,17 @@ public class User implements Serializable{
             // update the 'session' variable
             this.username = username;
             this.password = password;
+            this.is_logged = 1;
+            
             HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
             response.sendRedirect("home.xhtml");
+        }      
+        else{
+            FacesMessage fm = new FacesMessage("Wrong username or password.");
+            FacesContext.getCurrentInstance().addMessage("msg", fm);
+            // error
+            this.is_logged = -1;
         }
-
     }
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -96,8 +106,12 @@ public class User implements Serializable{
     public void signUpFunction(String username, String pw, String pw2) throws SQLException, IOException{
         
         // if the passwords are not the same
-        if(!pw.equals(pw2))
+        if(!pw.equals(pw2)){
+            FacesMessage fm = new FacesMessage("Passwords do not match.");
+            FacesContext.getCurrentInstance().addMessage("msg", fm);
             return;
+        }
+            
 
         // integer var
         int flag = 0;
@@ -117,10 +131,16 @@ public class User implements Serializable{
         con.close();
 
         // **if there's not** a user, direct to the new page "home.xhtml" *else* nothing happens
-        if(flag == 0)
+        if(flag == 0){
+            FacesMessage fm = new FacesMessage("That username already exists.");
+            FacesContext.getCurrentInstance().addMessage("msg", fm);
             return;
+        }
+            
         
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        this.username = username;
+        this.password = pw;
         response.sendRedirect("home.xhtml");
 
     }
@@ -189,13 +209,48 @@ public class User implements Serializable{
     }
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
     
-<<<<<<< Updated upstream
-=======
-    
+
+    /* Goal       : Change user's password.
+     * Parameters : new_password_1, new_password_2, current_password, username
+     * Security   : ???
+     */
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
-    public boolean checkFlag(){
-        return this.is_logged == -1;
+    public void changePassword(String username, String password1, String password2, String password_curr) throws SQLException{
+        
+        // check if the password1 and password2 match
+        if(!password1.equals(password2)){
+            FacesMessage fm = new FacesMessage("Passwords do not match.");
+            FacesContext.getCurrentInstance().addMessage("msg", fm);
+            return;
+        }
+            
+        // String variable 
+        String aux = "";
+        // connection to the database
+        Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/ProjectDB", "raposo","raposo0990123");
+        // prepare to create a statement
+        Statement ps = con.createStatement();
+        
+        try{
+            // verify if the curr_password match with database one
+            ResultSet x = ps.executeQuery("SELECT PASSWORD FROM USERS WHERE USERNAME = '" + username + "'");
+            // loop to get data
+            while(x.next()){
+                aux = x.getString("password");
+            }        
+        }catch(SQLException e){};
+        
+        // compare data
+        if(password_curr.equals(aux))
+            ps.executeUpdate("UPDATE USERS SET password = '" + password1 + "' WHERE username = '" + username + "'");
+        
+        this.username = username;
+        this.password = password1;
+        // close the connection to the database and statement
+        con.close();
+        ps.close();
+        
     }
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
->>>>>>> Stashed changes
+
 }

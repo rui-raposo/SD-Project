@@ -30,7 +30,7 @@ public class Profile_Service implements Serializable{
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
     private ArrayList<HousesProcess> myHouses = new ArrayList<>();
     private Part uploadedImg;
-    private final String path = "C:\\Users\\PC-HP\\Documents\\NetBeansProjects\\HouseManager\\web\\pages\\houses_img";
+    private final String path = "C:\\Users\\nosco\\Desktop\\SD-Project\\Final\\web\\pages\\houses_img";
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
     
     // Getters and Setters

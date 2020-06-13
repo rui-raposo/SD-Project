@@ -7,6 +7,7 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta charset="UTF-8" />
+        <link rel="icon" type="image/png" href="images/bird.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
@@ -149,12 +150,11 @@
             <div class="w3-bar w3-text-white w3-card-4" id="myNavbar">
                 <a class="w3-bar-item w3-button w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
                     <i style="color:white" class="fa fa-bars"></i></a>
-                <a href="#home" class="w3-bar-item w3-button w3-hover-opacity ">HOME</a>
-                <a href="#news" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-opacity ">NEWS</a>
-                <a href="#about" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-opacity ">HOUSES</a>
-                <a href="#activities" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-opacity ">ABOUT</a>
+                <a href="#main-title-bg" class="w3-bar-item w3-button w3-hover-opacity ">HOME</a>
+                <a href="#my-houses" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-opacity ">HOUSES</a>
+                <a href="#about" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-opacity ">ABOUT</a>
                 <a href="#team" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-opacity ">TEAM</a>
-                <a href="#outputs" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-opacity ">FAQ</a>
+                <a href="#faq" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-opacity ">FAQ</a>
                 <c:choose>
                     <c:when test="#{User.username != ''}" >
                         <a href="intro.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-opacity ">LOGOUT</a>
@@ -169,11 +169,10 @@
 
             <!-- Navbar on small screens -->
             <div id="navDemo" class="w3-bar-block w3-text-black w3-hide w3-hide-large">
-                <a href="#news" class="w3-bar-item w3-button" onclick="toggleFunction()">NEWS</a>
+                <a href="#my-houses" class="w3-bar-item w3-button" onclick="toggleFunction()">HOUSES</a>
                 <a href="#about" class="w3-bar-item w3-button" onclick="toggleFunction()">ABOUT</a>
-                <a href="#activities" class="w3-bar-item w3-button" onclick="toggleFunction()">ACTIVITIES</a>
                 <a href="#team" class="w3-bar-item w3-button" onclick="toggleFunction()">TEAM</a>
-                <a href="#outputs" class="w3-bar-item w3-button" onclick="toggleFunction()">OUTPUTS</a>
+                <a href="#faq" class="w3-bar-item w3-button" onclick="toggleFunction()">FAQ</a>
                 <c:choose>
                     <c:when test="#{User.username != ''}" >
                         <a href="intro.xhtml" class="w3-bar-item w3-button w3-hide-small w3-hide-medium">LOGOUT</a>
@@ -302,7 +301,7 @@
         var opacity = 0.02;
         var old_url = document.referrer;
 
-        if(old_url == "https://localhost:8181/HouseManager/faces/pages/intro.xhtml" || old_url == "https://localhost:8181/HouseManager/faces/pages/register.xhtml"){
+        if(old_url == "https://2.82.41.201/Final/faces/pages/intro.xhtml" || old_url == "https://2.82.41.201/Final/faces/pages/register.xhtml"){
             var id = setInterval(frame, 1);
   
             function frame() {
